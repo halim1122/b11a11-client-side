@@ -1,2 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Hand:wght@400..700&display=swap');
+
 @import "tailwindcss";
 @plugin "daisyui";
+
+.edu-sa-hand{
+  font-family: "Edu SA Hand", cursive;
+  font-optical-sizing: auto;
+}
+
+a.active {
+     text-decoration: underline;
+     font-weight: bold;
+}
