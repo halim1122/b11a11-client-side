@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
-
+import { FaEye } from "react-icons/fa";
+import { LuEyeClosed } from "react-icons/lu";
 const Register = () => {
 
      const provider = new GoogleAuthProvider();
@@ -82,7 +83,7 @@ const Register = () => {
 
      // console.log(user);
      return (
-          <div>
+          <div className="edu-sa-hand">
                <Helmet>
                     <title>
                          auth/register
@@ -92,7 +93,7 @@ const Register = () => {
                     <div className="flex justify-center mt-5 w-11/12 mx-auto">
                          <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                               <div className="card-body">
-                                   <h1 className="text-3xl font-bold text-indigo-950">Register HobbyHub</h1>
+                                   <h1 className="text-2xl font-semibold text-indigo-950">Register Our BrainBand</h1>
                                    <form onSubmit={handleRegisterUser} className="fieldset">
                                         {/* name field */}
                                         <label className="label">Name</label>
@@ -106,7 +107,7 @@ const Register = () => {
                                         <label className="label">Password</label>
                                         <div className='relative'>
                                              <input required type={passwords ? 'text' : 'password'} className="input w-full" name='password' placeholder="Password" />
-                                             <p onClick={handleEye} className='absolute top-[4px] right-[15px] bg-[#a6b8ef] text-white rounded-full p-2 z-10'></p>
+                                             <p onClick={handleEye} className='absolute top-[4px] right-[15px] bg-[#a6b8ef] text-white rounded-full p-2 z-10'>{passwords ?<LuEyeClosed /> : <FaEye /> }</p>
                                         </div>
                                         <div id="or-separator" className="or-separator mt-6 snapple-seperator">
                                              <span className="or-text">or</span>
@@ -117,8 +118,8 @@ const Register = () => {
                                              Register with Google
                                         </button>
                                         <p className='text-error text-xs font-semibold'>{error}</p>
-                                        <button type='submit' className="btn bg-secondary btn-neutral mt-4">Register</button>
-                                        <p className='font-semibold text-center mt-4'>Already Have An Account? <Link className='text-secondary' to='/auth/login'>Login</Link></p>
+                                        <button type='submit' className="btn bg-[#342995] btn-neutral mt-4">Register</button>
+                                        <p className='font-semibold text-center mt-4'>Already Have An Account? <Link className='text-[#342995]' to='/auth/login'>Login</Link></p>
                                    </form>
                               </div>
                          </div>

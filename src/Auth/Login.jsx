@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import { LuEyeClosed } from "react-icons/lu";
+import { FaEye } from "react-icons/fa";
 
 const Login = () => {
      const provider = new GoogleAuthProvider();
@@ -58,18 +60,18 @@ const Login = () => {
                          auth/login
                     </title>
                </Helmet>
-               <div className="hero bgimg min-h-screen">
+               <div className="hero bgimg min-h-screen edu-sa-hand">
                     <div className="hero-content flex-col w-11/12 mx-auto lg:flex-row-reverse">
                          <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                               <div className="card-body">
-                                   <h1 className="text-4xl font-bold text-indigo-950">Login HobbyHub</h1>
+                                   <h1 className="text-3xl font-semibold text-indigo-950">Login Our BrainBand</h1>
                                    <form onSubmit={handleLogin} className="fieldset">
                                         <label className="label">Email</label>
                                         <input type="email" className="input w-full" name='email' placeholder="Email" />
                                         <label className="label">Password</label>
                                         <div className='relative'>
                                              <input required type={passwords ? 'text' : 'password'} className="input w-full" name='password' placeholder="Password" />
-                                             <p onClick={handleEye} className='absolute top-[4px] right-[15px] bg-[#a6b8ef] text-white rounded-full p-2 z-10'> </p>
+                                             <p onClick={handleEye} className='absolute top-[4px] right-[15px] bg-[#a6b8ef] text-white rounded-full p-2 z-10'>{passwords ?<LuEyeClosed /> : <FaEye /> }</p>
                                         </div>
                                         <div><a className="link link-hover">Forgot password?</a></div>
                                         <div id="or-separator" className="or-separator mt-4 snapple-seperator">
@@ -80,8 +82,8 @@ const Login = () => {
                                              Login with Google
                                         </button>
                                         <p className='text-error text-xs font-semibold'>{error}</p>
-                                        <button className="btn bg-secondary btn-neutral mt-4">Login</button>
-                                        <p className='font-semibold text-center mt-4'>Don't Have An Account? <Link className='text-secondary' to='/auth/register'>Register</Link></p>
+                                        <button className="btn bg-[#342995] btn-neutral mt-4">Login</button>
+                                        <p className='font-semibold text-center mt-4'>Don't Have An Account? <Link className='text-[#342995]' to='/auth/register'>Register</Link></p>
 
                                    </form>
                               </div>

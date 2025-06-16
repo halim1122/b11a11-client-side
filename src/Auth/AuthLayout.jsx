@@ -1,11 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 import Navbar from '../Page/Navbar';
+import LoginNavbar from '../Page/LoginNavbar';
 
 const AuthLayout = () => {
      return (
           <div>
-               <Navbar></Navbar>
+               <div className='shadow'>
+                    <LoginNavbar></LoginNavbar>
+               </div>
                <Outlet></Outlet>
           </div>
      );

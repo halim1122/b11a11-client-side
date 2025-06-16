@@ -1,48 +1,68 @@
-import React from 'react';
 import { NavLink } from 'react-router';
+import { AuthContext } from '../Provider/AuthProvider';
+import { useContext } from 'react';
 
 const Navbar = () => {
 
+     const {user}=useContext(AuthContext);
+
      const links = <>
-<li><NavLink to='/'>Home</NavLink></li>
-<li><NavLink to='/assignments'>Assignments</NavLink></li>
+          <li><NavLink to='/'>Home</NavLink></li>
+          <li><NavLink to='/assignments'>Assignments</NavLink></li>
      </>
      const links2 = <>
-<li><NavLink to='/create-assignment'>Create Assignment</NavLink></li>
-<li><NavLink to='/attemded-assignments'>Attemded Assignments</NavLink></li>
+          <li><NavLink to='/create-assignment'>Create Assignment</NavLink></li>
+          <li><NavLink to='/attemded-assignments'>Attemded Assignments</NavLink></li>
      </>
      return (
-         <div className='w-11/12 mx-auto text-white'>
-           <div className="flex justify-between navbar items-center">
-               <div>
-                    <a className="text-xl edu-sa-hand">BrainBand</a>
-               </div>
-               <div>
-                    <ul
-                         tabIndex={0}
-                         className='flex gap-4'
-                         >
-                         {links}
-                    </ul>
-               </div>
-               <div>
-                    <div className="dropdown dropdown-end">
-                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                              <div className="w-10 rounded-full">
-                                   <img
-                                        alt="Tailwind CSS Navbar component"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                              </div>
-                         </div>
+          <div className='w-11/12 mx-auto text-white'>
+               <div className="flex justify-between navbar items-center">
+                    <div>
+                         <a className="text-xl edu-sa-hand">BrainBand</a>
+                    </div>
+                    <div className='hidden md:flex'>
                          <ul
                               tabIndex={0}
-                              className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box z-1 mt-3 w-52 p-2 shadow">
-                              {links2}
+                              className='flex gap-4'
+                         >
+                              {links}
                          </ul>
+                    </div>
+                    <div>
+                         <div className="dropdown dropdown-end">
+                              <div tabIndex={0} role="button" className="w-auto relative group flex justify-end items-center gap-3 mt-0">
+                                   {user ? (
+                                        <div>
+                                             <img
+                                                  className="rounded-full md:h-10 h-7 w-7 md:w-10 object-cover"
+                                                  src={user.photoURL}
+                                                  alt="User"
+                                             />
+                                             <div className="absolute -top-[30px] md:-top-[26px] -left-40 md:-left-40 transform translate-x-1/2 translate-y-full p-2 bg-black text-white text-xs rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                  {user.displayName}
+                                             </div>
+                                        </div>
+                                   ) : (
+                                        <img
+                                             className="rounded-full md:h-10 h-8 w-8 md:w-10 object-cover"
+                                             src="https://i.ibb.co/HLcVYWvt/149071.png"
+                                             alt="User"
+                                        />
+                                   )}
+                              </div>
+                              <ul
+                                   tabIndex={0}
+                                   className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box z-1 mt-3 w-52 p-2 shadow">
+                                   <div className='md:hidden'>
+                                        {links}
+                                   </div>
+                                   {links2}
+
+                              </ul>
+                         </div>
                     </div>
                </div>
           </div>
-         </div>
      );
 };
 
