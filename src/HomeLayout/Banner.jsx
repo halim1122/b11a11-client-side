@@ -13,7 +13,7 @@ const Banner = () => {
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-4xl md:text-5xl font-bold text-[#342995] mb-6 leading-tight">
+        <h1 className="text-3xl md:text-5xl font-bold text-[#342995] mb-6 leading-tight">
           Study Together with <span className="text-[#66ffb2]">BrainBand</span>
         </h1>
         <p className="text-lg text-gray-600 mb-6">

@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import { useContext } from 'react';
+import LogoImg from '../../src/assets/ChatGPT Image Jun 16, 2025, 05_08_07 PM.png';
 
 const Navbar = () => {
 
@@ -18,8 +19,11 @@ const Navbar = () => {
      return (
           <div className='w-11/12 mx-auto text-white'>
                <div className="flex justify-between navbar items-center">
-                    <div>
-                         <a className="text-xl edu-sa-hand">BrainBand</a>
+                    <div className='flex items-center'>
+                         <div>
+                              <img className='w-12 h-12 hidden md:flex' src={LogoImg} alt="" />
+                         </div>
+                         <a className="text-md md:text-xl edu-sa-hand">BrainBand</a>
                     </div>
                     <div className='hidden md:flex'>
                          <ul
