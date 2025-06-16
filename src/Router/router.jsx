@@ -9,6 +9,7 @@ import CreateAssignment from "../Page/CreateAssignment";
 import AttemdedAssignments from "../Page/AttemdedAssignments";
 import AuthPrivate from "../Provider/AuthPrivate";
 import PendingAssignments from "../Page/PendingAssignments ";
+import Loading from "../Auth/Loading";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'assignments',
+        loader: () => fetch('http://localhost:3000/assignments'),
+        hydrateFallbackElement: <Loading></Loading>,
         Component: Assignments
       },
       {
