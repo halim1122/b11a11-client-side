@@ -1,6 +1,6 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
@@ -11,6 +11,9 @@ const Register = () => {
      const provider = new GoogleAuthProvider();
 
      const Navigate = useNavigate();
+
+     const location =useLocation()
+     
      const { setUser, handleRegister, handleGoogleRegister, upDateUser } = useContext(AuthContext);;
      const [error, setError] = useState("");
      const [passwords, setPasswords] = useState(false);
@@ -67,7 +70,7 @@ const Register = () => {
                     toast.success(`✅ ${name} your Register successfull`);
                }, 300)
           }
-          Navigate("/");
+          Navigate(`${location.state ? location.state : '/'}`);
 
      }
 
@@ -77,7 +80,7 @@ const Register = () => {
                setTimeout(() => {
                     toast.success(`✅ ${result.user.displayName} your Register successfull`);
                }, 300)
-               Navigate("/");
+               Navigate(`${location.state ? location.state : '/'}`);
           }).catch(error => setError(error.message));
      };
 

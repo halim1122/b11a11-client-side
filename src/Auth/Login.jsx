@@ -50,7 +50,7 @@ const Login = () => {
                setTimeout(() => {
                     toast.success(`✅ ${result.user.displayName} your Login successfull`);
                }, 300)
-               Navigate("/")
+               Navigate(`${location.state ? location.state : '/'}`);
           }).catch(error => setError(error.message));
      }
      return (

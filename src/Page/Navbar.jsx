@@ -9,10 +9,11 @@ const Navbar = () => {
      const links = <>
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/assignments'>Assignments</NavLink></li>
+          {user && <li><NavLink to='/pending-assignments'>Pending Assignments</NavLink></li>}
      </>
      const links2 = <>
           <li><NavLink to='/create-assignment'>Create Assignment</NavLink></li>
-          <li><NavLink to='/attemded-assignments'>Attemded Assignments</NavLink></li>
+          <li><NavLink to='/attemded-assignments'>My Attempted Assignments</NavLink></li>
      </>
      return (
           <div className='w-11/12 mx-auto text-white'>

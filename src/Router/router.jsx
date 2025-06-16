@@ -7,6 +7,8 @@ import Register from "../Auth/Register";
 import Assignments from "../Page/Assignments";
 import CreateAssignment from "../Page/CreateAssignment";
 import AttemdedAssignments from "../Page/AttemdedAssignments";
+import AuthPrivate from "../Provider/AuthPrivate";
+import PendingAssignments from "../Page/PendingAssignments ";
 
 export const router = createBrowserRouter([
   {
@@ -22,11 +24,15 @@ export const router = createBrowserRouter([
       },
       {
         path: 'create-assignment',
-        Component: CreateAssignment
+        element: <AuthPrivate><CreateAssignment></CreateAssignment></AuthPrivate>
       },
       {
         path:'attemded-assignments',
-        Component: AttemdedAssignments
+        element: <AuthPrivate><AttemdedAssignments></AttemdedAssignments></AuthPrivate>
+      },
+      {
+        path:'pending-assignments',
+        element:<AuthPrivate><PendingAssignments></PendingAssignments></AuthPrivate>
       }
 
     ]
