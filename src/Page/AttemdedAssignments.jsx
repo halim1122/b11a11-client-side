@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../Provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const MySubmittedAssignments = () => {
   const { user } = useContext(AuthContext);
@@ -25,6 +26,11 @@ const MySubmittedAssignments = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-4">
+     <Helmet>
+               <title>
+                    my-submitted-assignments
+               </title>
+          </Helmet>
       <h2 className="text-2xl font-bold mb-6">My Submitted Assignments</h2>
 
       {assignments.length > 0 ? (

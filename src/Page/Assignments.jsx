@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import AssignmentCard from './AssignmentCard';
+import { Helmet } from 'react-helmet-async';
 
 const Assignments = () => {
   const initialAssignments = useLoaderData();
@@ -13,6 +14,11 @@ const Assignments = () => {
 
   return (
     <div className="py-8 px-4">
+      <Helmet>
+                <title>
+                     Assignments
+                </title>
+           </Helmet>
       {assignments.length === 0 ? (
         <div className="text-center text-gray-500 text-lg mt-10">
           ❌ No assignments available.

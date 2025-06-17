@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import GiveMarkModal from "./GiveMarkModal";
+import { Helmet } from "react-helmet-async";
 
 const PendingAssignments = () => {
   const { user } = useContext(AuthContext);
@@ -22,6 +23,11 @@ const PendingAssignments = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
+     <Helmet>
+          <title>
+               pending-assignments
+          </title>
+     </Helmet>
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-6 text-center sm:text-left">
         Pending Assignments
       </h2>

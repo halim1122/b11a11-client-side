@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { AuthContext } from '../Provider/AuthProvider'; // adjust path
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import { Helmet } from 'react-helmet-async';
 const CreateAssignment = () => {
      const { user } = useContext(AuthContext);
      const [dueDate, setDueDate] = useState(new Date());
@@ -43,6 +44,11 @@ const CreateAssignment = () => {
 
      return (
           <div className='max-w-xl mx-auto p-6 bg-white rounded shadow'>
+               <Helmet>
+                         <title>
+                              Create-Assignments
+                         </title>
+                    </Helmet>
                <h2 className='text-2xl font-bold mb-4 text-center text-[#342995]'>Create Assignment</h2>
 
                <form onSubmit={handleCreateAssignment} className='space-y-4'>

@@ -4,6 +4,7 @@ import { FaArrowLeft, FaUserCircle } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const ViewAssignment = () => {
   const data = useLoaderData();
@@ -54,6 +55,11 @@ const ViewAssignment = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
+     <Helmet>
+               <title>
+                    view-assignments
+               </title>
+          </Helmet>
       {/* Back button */}
       <button
         onClick={() => navigate(-1)}

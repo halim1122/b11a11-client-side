@@ -4,6 +4,7 @@ import { useLoaderData, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const Update = () => {
 
@@ -65,6 +66,11 @@ const Update = () => {
      }
      return (
           <div className='max-w-xl mx-auto p-6 bg-white rounded my-3 shadow-2xl shadow-[#342995]'>
+               <Helmet>
+                         <title>
+                              update-assignments
+                         </title>
+                    </Helmet>
                <h2 className='text-2xl font-bold mb-4 text-center text-[#342995]'>Update Your Assignment</h2>
 
                <form onSubmit={handleUpDateAssignment} className='space-y-4'>
