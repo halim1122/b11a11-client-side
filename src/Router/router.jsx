@@ -10,6 +10,7 @@ import AttemdedAssignments from "../Page/AttemdedAssignments";
 import AuthPrivate from "../Provider/AuthPrivate";
 import PendingAssignments from "../Page/PendingAssignments ";
 import Loading from "../Auth/Loading";
+import Update from "../components/Update";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,13 @@ export const router = createBrowserRouter([
         loader: () => fetch(`${import.meta.env.VITE_API}/assignments`),
         hydrateFallbackElement: <Loading></Loading>,
         Component: Assignments
+      },
+      {
+        path:'assignment/update/:id',
+        loader: ({params}) =>  fetch(`http://localhost:3000/assignment/${params.id}`),
+        hydrateFallbackElement: <Loading></Loading>,
+        Component: Update
+        
       },
       {
         path: 'create-assignment',

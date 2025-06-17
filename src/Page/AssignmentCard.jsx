@@ -5,10 +5,13 @@ import Swal from "sweetalert2";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 
-const AssignmentCard = ({ assignment , handleRemove}) => {
+const AssignmentCard = ({ assignment, handleRemove }) => {
   const { _id, title, marks, level, thumbnail, creatorEmail } = assignment;
 
   const { user } = useContext(AuthContext);
+
+  // DELETE  functionality------------
+
   const handleDelete = (id) => {
     // console.log(id)
     Swal.fire({
@@ -44,8 +47,6 @@ const AssignmentCard = ({ assignment , handleRemove}) => {
         }
       }
     });
-
-
   }
 
   return (
@@ -84,14 +85,14 @@ const AssignmentCard = ({ assignment , handleRemove}) => {
       {/* Action Buttons */}
       <div className="mt-4 flex flex-wrap justify-center gap-2">
         <Link
-          to={`/assignments/${_id}`}
+          to={`/assignment/${_id}`}
           className="btn btn-sm border border-[#342995] text-[#342995] hover:bg-[#342995] hover:text-white flex items-center gap-1 px-4 py-2 rounded-full"
         >
           <FaEye /> View
         </Link>
 
         <Link
-          to={`/assignments/update/${_id}`}
+          to={`/assignment/update/${_id}`}
           className="btn btn-sm border border-[#342995] text-[#342995] hover:bg-[#342995] hover:text-white flex items-center gap-1 px-4 py-2 rounded-full"
         >
           <FaEdit /> Update
