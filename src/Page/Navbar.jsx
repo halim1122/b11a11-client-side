@@ -7,6 +7,7 @@ const Navbar = () => {
 
      const {user}=useContext(AuthContext);
 
+     // console.log(`${import.meta.env.VITE_API}`)
      const links = <>
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/assignments'>Assignments</NavLink></li>

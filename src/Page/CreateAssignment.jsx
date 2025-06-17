@@ -25,7 +25,7 @@ const CreateAssignment = () => {
 
           console.log(assignment);
 
-          axios.post('http://localhost:3000/assignments', assignment).then(res => {
+          axios.post(`${import.meta.env.VITE_API}/assignments`, assignment).then(res => {
                if (res.data.insertedId) {
                     Swal.fire({
                          title: "✅ Assignment create successfully",
