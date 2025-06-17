@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { FaArrowLeft, FaUserCircle } from "react-icons/fa";
+import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const ViewAssignment = () => {
   const data = useLoaderData();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const {
+    _id,
     title,
     description,
     thumbnail,
@@ -17,74 +22,121 @@ const ViewAssignment = () => {
     creatorName,
   } = data;
 
+  const [open, setOpen] = useState(false);
+  const [docLink, setDocLink] = useState("");
+  const [note, setNote] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const submissionData = {
+      assignmentId: _id,
+      assignmentTitle: title,
+      submittedBy: user?.email,
+      docsLink: docLink,
+      note,
+      status: "pending",
+      submittedAt: new Date(),
+    };
+
+    try {
+      const res = await axios.post(`http://localhost:3000/submissions`, submissionData);
+      if (res.data.insertedId) {
+        Swal.fire("Success!", "Assignment submitted successfully!", "success");
+        setOpen(false);
+        setDocLink("");
+        setNote("");
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error", "Submission failed", "error");
+    }
+  };
+
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      {/* Back Button */}
+    <div className="max-w-6xl mx-auto px-4 py-10">
+      {/* Back button */}
       <button
         onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-primary hover:gap-3 transition-all duration-200 mb-6 font-medium text-lg"
+        className="mb-6 flex items-center gap-2 text-primary hover:underline"
       >
-        <FaArrowLeft className="text-primary" />
-        <span>Back to Assignments</span>
+        <FaArrowLeft /> Back
       </button>
 
-      {/* Main Card */}
-      <div className="bg-white shadow-xl rounded-3xl overflow-hidden flex flex-col lg:flex-row border border-gray-200">
-        {/* Thumbnail Section */}
-        <div className="lg:w-1/2 w-full h-64 lg:h-auto">
-          <img
-            src={thumbnail}
-            alt={title}
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Details Section */}
-        <div className="lg:w-1/2 p-8 flex flex-col justify-between">
-          <div>
-            <h1 className="text-4xl font-bold text-primary mb-4">{title}</h1>
-
-            {/* Badges */}
-            <div className="flex flex-wrap gap-3 mb-4">
-              <span
-                className={`text-sm font-semibold px-3 py-1 rounded-full ${
-                  level === "easy"
-                    ? "bg-green-100 text-green-700"
-                    : level === "medium"
-                    ? "bg-yellow-100 text-yellow-700"
-                    : "bg-red-100 text-red-700"
-                }`}
-              >
-                {level.toUpperCase()} Level
-              </span>
-
-              <span className="text-sm font-semibold px-3 py-1 bg-blue-100 text-blue-700 rounded-full">
-                {marks} Marks
-              </span>
-
-              <span className="text-sm font-semibold px-3 py-1 bg-gray-100 text-gray-700 rounded-full">
-                Due: {dueDate}
-              </span>
-            </div>
-
-            {/* Description */}
-            <p className="text-gray-700 leading-relaxed mb-6">
-              {description}
-            </p>
+      {/* Assignment details */}
+      <div className="bg-white rounded-2xl shadow-md flex flex-col lg:flex-row">
+        <img
+          src={thumbnail}
+          alt={title}
+          className="w-full lg:w-1/2 object-cover rounded-t-2xl lg:rounded-l-2xl lg:rounded-t-none"
+        />
+        <div className="p-6 lg:p-8 flex-1">
+          <h1 className="text-3xl font-bold text-primary mb-4">{title}</h1>
+          <div className="mb-4 space-y-2">
+            <p><strong>Marks:</strong> {marks}</p>
+            <p><strong>Level:</strong> {level}</p>
+            <p><strong>Due Date:</strong> {dueDate}</p>
+            <p className="text-gray-700">{description}</p>
           </div>
-
-          {/* Creator Info */}
-          <div className="flex items-center gap-3 mt-4">
-            <FaUserCircle className="text-4xl text-primary" />
+          <div className="mt-6 flex items-center gap-3">
+            <FaUserCircle className="text-2xl text-primary" />
             <div>
-              <p className="text-sm font-semibold text-primary">
-                {creatorName}
-              </p>
+              <p className="font-semibold">{creatorName}</p>
               <p className="text-sm text-gray-500">{creatorEmail}</p>
             </div>
           </div>
+
+          {/* Take Assignment Button */}
+          <button
+            onClick={() => setOpen(true)}
+            className="mt-6 px-5 py-2 bg-primary text-white rounded hover:bg-indigo-800 transition"
+          >
+            Take Assignment
+          </button>
         </div>
       </div>
+
+      {/* Modal */}
+      {open && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl max-w-lg w-full relative">
+            <h2 className="text-xl font-semibold text-primary mb-4">
+              Submit Assignment
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="url"
+                required
+                placeholder="Google Docs Link"
+                value={docLink}
+                onChange={(e) => setDocLink(e.target.value)}
+                className="w-full px-4 py-2 border rounded"
+              />
+              <textarea
+                placeholder="Quick Note"
+                rows="4"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                className="w-full px-4 py-2 border rounded"
+              />
+              <div className="flex justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="px-4 py-2 border border-gray-400 rounded hover:bg-gray-100"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2 bg-primary text-white rounded hover:bg-indigo-800"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
