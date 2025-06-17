@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FaEye, FaEdit, FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -9,6 +9,7 @@ const AssignmentCard = ({ assignment, handleRemove }) => {
   const { _id, title, marks, level, thumbnail, creatorEmail } = assignment;
 
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   // DELETE  functionality------------
 
@@ -85,21 +86,27 @@ const AssignmentCard = ({ assignment, handleRemove }) => {
       {/* Action Buttons */}
       <div className="mt-4 flex flex-wrap justify-center gap-2">
         <Link
-          to={`/assignment/${_id}`}
+          to={user ? `/assignment/${_id}` : `/auth/login`}
           className="btn btn-sm border border-[#342995] text-[#342995] hover:bg-[#342995] hover:text-white flex items-center gap-1 px-4 py-2 rounded-full"
         >
           <FaEye /> View
         </Link>
 
         <Link
-          to={`/assignment/update/${_id}`}
+          to={user ? `/assignment/update/${_id}` : `/auth/login`}
           className="btn btn-sm border border-[#342995] text-[#342995] hover:bg-[#342995] hover:text-white flex items-center gap-1 px-4 py-2 rounded-full"
         >
           <FaEdit /> Update
         </Link>
 
         <button
-          onClick={() => handleDelete(_id)}
+          onClick={() => {
+            if (user) {
+              handleDelete(_id);
+            } else {
+              navigate('/auth/login')
+            }
+          }}
           className="btn btn-sm border border-red-500 text-red-600 hover:bg-red-600 hover:text-white flex items-center gap-1 px-4 py-2 rounded-full"
         >
           <FaTrashAlt /> Delete

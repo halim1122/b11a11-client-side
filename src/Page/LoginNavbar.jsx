@@ -27,7 +27,6 @@ const LoginNavbar = () => {
           <div className='flex edu-sa-hand text-white border-2 border-white'>
                <div className='md:flex-1'></div>
                <div className='flex md:gap-4 gap-2 items-center my-2 mx-5'>
-                    <input type="checkbox" defaultChecked className="toggle" />
                     <div>
                          {!user?.email && (
                               <><Link

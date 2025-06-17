@@ -10,10 +10,12 @@ import { router } from './Router/router.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
    <AuthProvider>
+    {/* <ThemeProvider> */}
     <HelmetProvider>
     <RouterProvider router={router}></RouterProvider>
     <ToastContainer/>
     </HelmetProvider>
+    {/* </ThemeProvider> */}
    </AuthProvider>
   </StrictMode>,
 )

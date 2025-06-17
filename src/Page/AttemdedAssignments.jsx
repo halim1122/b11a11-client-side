@@ -1,66 +1,62 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
+import { AuthContext } from "../Provider/AuthProvider";
 
-const AttemdedAssignments = () => {
+const MySubmittedAssignments = () => {
   const { user } = useContext(AuthContext);
-  const [myAssignments, setMyAssignments] = useState([]);
+  const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
     if (!user?.email) return;
 
     axios
-      .get(`http://localhost:3000/submissions?email=${user.email}`)
-      .then((res) => {
-        setMyAssignments(res.data);
+      .get("http://localhost:3000/submissions", {
+        params: {
+          submittedBy: user.email,  // user এর সাবমিশন আনতে
+        },
       })
-      .catch((err) => console.error(err));
+      .then((res) => {
+        setAssignments(res.data);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch submissions:", err);
+      });
   }, [user?.email]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
-      <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
-        My Submitted Assignments
-      </h2>
+    <div className="max-w-6xl mx-auto p-4">
+      <h2 className="text-2xl font-bold mb-6">My Submitted Assignments</h2>
 
-      {myAssignments.length > 0 ? (
-        <div className="overflow-x-auto bg-white shadow rounded-lg">
-          <table className="min-w-full table-auto text-sm md:text-base">
-            <thead className="bg-primary text-white">
+      {assignments.length > 0 ? (
+        <div className="overflow-x-auto">
+          <table className="min-w-full border border-gray-300 border-collapse">
+            <thead className="bg-gray-100">
               <tr>
-                <th className="p-4 text-left">Title</th>
-                <th className="p-4 text-left">Status</th>
-                <th className="p-4 text-left">Total Marks</th>
-                <th className="p-4 text-left">Obtained</th>
-                <th className="p-4 text-left">Feedback</th>
+                <th className="border border-gray-300 p-3 text-left whitespace-nowrap">Title</th>
+                <th className="border border-gray-300 p-3 text-left whitespace-nowrap">Status</th>
+                <th className="border border-gray-300 p-3 text-left whitespace-nowrap">Total Marks</th>
+                <th className="border border-gray-300 p-3 text-left whitespace-nowrap">Obtained Marks</th>
+                <th className="border border-gray-300 p-3 text-left whitespace-nowrap">Feedback</th>
               </tr>
             </thead>
             <tbody>
-              {myAssignments.map((assignment) => (
-                <tr key={assignment._id} className="border-b hover:bg-gray-50 transition">
-                  <td className="p-4">{assignment.assignmentTitle || "Untitled"}</td>
-                  <td className="p-4 capitalize">{assignment.status || "pending"}</td>
-                  <td className="p-4">{assignment.marks || "N/A"}</td>
-                  <td className="p-4">
-                    {assignment.status === "completed"
-                      ? assignment.givenMark ?? "0"
-                      : "--"}
-                  </td>
-                  <td className="p-4">
-                    {assignment.status === "completed"
-                      ? assignment.feedback || "No feedback"
-                      : "--"}
-                  </td>
+              {assignments.map((assignment) => (
+                <tr key={assignment._id} className="hover:bg-gray-50">
+                  <td className="border border-gray-300 p-3">{assignment.assignmentTitle || "Untitled"}</td>
+                  <td className="border border-gray-300 p-3 capitalize">{assignment.status}</td>
+                  <td className="border border-gray-300 p-3">{assignment.marks ?? "--"}</td>
+                  <td className="border border-gray-300 p-3">{assignment.givenMark ?? "--"}</td>
+                  <td className="border border-gray-300 p-3">{assignment.feedback ?? "--"}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       ) : (
-        <p className="text-center text-gray-500">You haven’t submitted any assignments yet.</p>
+        <p className="text-gray-500">No submitted assignments found.</p>
       )}
     </div>
   );
 };
 
-export default AttemdedAssignments;
+export default MySubmittedAssignments;

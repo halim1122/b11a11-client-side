@@ -2,12 +2,14 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import React, { createContext, useEffect } from 'react';
 import { auth } from '../firebase/firebase.init';
 import { useState } from 'react';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
-export const AuthContext =createContext(null);
+export const AuthContext = createContext(null);
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
 
-     
+
      const [user, setUser] = useState(null);
      const [loading, setLoading] = useState(true);
 
@@ -41,6 +43,15 @@ const AuthProvider = ({children}) => {
           const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
                setUser(currentUser);
                setLoading(false);
+
+               axios.post('http://localhost:3000/jwt', { email: currentUser.email }, { withCredentials: true })
+                    .then(res => {
+                         if (res.data?.success) {
+                              console.log('✅ JWT set successfully', res?.data);
+                              alert('Except All Cookies')
+                         }
+                    })
+                    .catch(error => console.log('❌ Error setting JWT:', error))
           });
           return () => {
                unsubscribe();
