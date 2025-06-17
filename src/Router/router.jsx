@@ -11,6 +11,7 @@ import AuthPrivate from "../Provider/AuthPrivate";
 import PendingAssignments from "../Page/PendingAssignments ";
 import Loading from "../Auth/Loading";
 import Update from "../components/Update";
+import ViewAssignment from "../components/ViewAssignment";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,13 @@ export const router = createBrowserRouter([
         loader: ({params}) =>  fetch(`http://localhost:3000/assignment/${params.id}`),
         hydrateFallbackElement: <Loading></Loading>,
         Component: Update
+        
+      },
+      {
+        path:'assignment/:id',
+        loader: ({params}) =>  fetch(`http://localhost:3000/assignment/${params.id}`),
+        hydrateFallbackElement: <Loading></Loading>,
+        Component: ViewAssignment
         
       },
       {
