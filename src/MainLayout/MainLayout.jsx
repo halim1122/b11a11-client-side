@@ -8,10 +8,10 @@ const MainLayout = () => {
      return (
           <div>
                <LoginNavbar></LoginNavbar>
-               <header className='shadow bg-[#342995]'>
+               <header className='shadow fixed top-[56px] w-full z-40 bg-[#342995]'>
                     <Navbar></Navbar>
                </header>
-              <div className='w-11/12 mx-auto'>
+              <div className='w-11/12 mx-auto mt-30'>
                 <Outlet></Outlet>
               </div>
                <footer>

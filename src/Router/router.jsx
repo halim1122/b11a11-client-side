@@ -1,17 +1,20 @@
+
 import { createBrowserRouter } from "react-router";
-import MainLayout from "../MainLayout/MainLayout";
-import Home from "../HomeLayout/Home";
-import Login from "../Auth/Login";
-import AuthLayout from "../Auth/AuthLayout";
-import Register from "../Auth/Register";
-import Assignments from "../Page/Assignments";
-import CreateAssignment from "../Page/CreateAssignment";
-import AttemdedAssignments from "../Page/AttemdedAssignments";
 import AuthPrivate from "../Provider/AuthPrivate";
+import ViewAssignment from "../components/ViewAssignment";
 import PendingAssignments from "../Page/PendingAssignments ";
 import Loading from "../Auth/Loading";
+import MainLayout from "../MainLayout/MainLayout";
+import Home from "../HomeLayout/Home";
+import Assignments from "../Page/Assignments";
 import Update from "../components/Update";
-import ViewAssignment from "../components/ViewAssignment";
+import CreateAssignment from "../Page/CreateAssignment";
+import AttemdedAssignments from "../Page/AttemdedAssignments";
+import AuthLayout from "../Auth/AuthLayout";
+import Register from "../Auth/Register";
+import Login from "../Auth/Login";
+
+
 
 export const router = createBrowserRouter([
   {
@@ -19,55 +22,55 @@ export const router = createBrowserRouter([
     Component: MainLayout,
     children: [
       {
-        index: true, Component: Home
+        index: true,
+        Component: Home
       },
       {
         path: 'assignments',
-        loader: () => fetch(`${import.meta.env.VITE_API}/assignments`),
-        hydrateFallbackElement: <Loading></Loading>,
+        loader: () => fetch(`${import.meta.env.VITE_API}/assignments`, {
+          credentials: 'include'
+        }),
+        hydrateFallbackElement: <Loading />,
         Component: Assignments
       },
       {
-        path:'assignment/update/:id',
-        loader: ({params}) =>  fetch(`http://localhost:3000/assignment/${params.id}`),
-        hydrateFallbackElement: <Loading></Loading>,
+        path: 'assignment/update/:id',
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API}/assignment/${params.id}`),
+        hydrateFallbackElement: <Loading />,
         Component: Update
-        
       },
       {
-        path:'assignment/:id',
-        loader: ({params}) =>  fetch(`http://localhost:3000/assignment/${params.id}`),
-        hydrateFallbackElement: <Loading></Loading>,
+        path: 'assignment/:id',
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API}/assignment/${params.id}`),
+        hydrateFallbackElement: <Loading />,
         Component: ViewAssignment
-        
       },
       {
         path: 'create-assignment',
-        element: <AuthPrivate><CreateAssignment></CreateAssignment></AuthPrivate>
+        element: <AuthPrivate><CreateAssignment /></AuthPrivate>
       },
       {
-        path:'attemded-assignments',
-        element: <AuthPrivate><AttemdedAssignments></AttemdedAssignments></AuthPrivate>
+        path: 'attemded-assignments',
+        element: <AuthPrivate><AttemdedAssignments /></AuthPrivate>
       },
       {
-        path:'pending-assignments',
-        element:<AuthPrivate><PendingAssignments></PendingAssignments></AuthPrivate>
+        path: 'pending-assignments',
+        element: <AuthPrivate><PendingAssignments /></AuthPrivate>
       }
-
     ]
   },
   {
     path: "/auth",
-    element: <AuthLayout></AuthLayout>,
+    element: <AuthLayout />,
     children: [
       {
         path: "/auth/login",
-        element: <Login></Login>
+        element: <Login />
       },
       {
         path: "/auth/register",
-        element: <Register></Register>
+        element: <Register />
       }
     ]
-  },
+  }
 ]);

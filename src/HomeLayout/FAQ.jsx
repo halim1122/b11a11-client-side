@@ -13,12 +13,14 @@ const FAQ = () => {
         "Just register with your email. Once you're in, you're automatically connected with every other user as a friend.",
     },
     {
-     question: " How are assignments graded?",
-     answer: "Any user can grade another user's submitted assignment. The grading is peer-reviewed, which ensures fairness and collaborative learning."
+      question: "How are assignments graded?",
+      answer:
+        "Any user can grade another user's submitted assignment. The grading is peer-reviewed, which ensures fairness and collaborative learning.",
     },
     {
-     question: "Can I edit or delete my assignments?",
-     answer: "Yes. Go to the “My Assignments” section to edit or delete the assignments you created."
+      question: "Can I edit or delete my assignments?",
+      answer:
+        "Yes. Go to the “My Assignments” section to edit or delete the assignments you created.",
     },
     {
       question: "What can I do after logging in?",
@@ -43,19 +45,26 @@ const FAQ = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-10 p-6 bg-white rounded-xl shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center text-[#342995]">Frequently Asked Questions</h2>
+    <div className="max-w-3xl mx-auto my-10 p-6 rounded-xl shadow-lg bg-white text-gray-800 dark:bg-[#1e1e2f] dark:text-amber-800 transition-all duration-300">
+      <h2 className="text-2xl font-bold mb-6 text-center text-[#342995] dark:text-white">
+        Frequently Asked Questions
+      </h2>
       <div className="space-y-4">
         {faqs.map((faq, index) => (
-          <div key={index} className="border rounded-md shadow-sm">
+          <div
+            key={index}
+            className="border rounded-md bg-gray-50 dark:bg-[#2d2d44] border-gray-300 dark:border-[#444] transition-all duration-200"
+          >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full text-left px-4 py-3 font-semibold text-[#342995] hover:bg-[#f3f4f6] focus:outline-none"
+              className="w-full text-left px-4 py-3 font-semibold text-[#342995] dark:text-white hover:bg-gray-100 dark:hover:bg-[#3b3b55] focus:outline-none"
             >
               {faq.question}
             </button>
             {openIndex === index && (
-              <div className="px-4 py-3 text-gray-700 border-t">{faq.answer}</div>
+              <div className="px-4 py-3 text-gray-700 dark:text-gray-300 border-t border-gray-200 dark:border-[#555]">
+                {faq.answer}
+              </div>
             )}
           </div>
         ))}

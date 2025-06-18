@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import { toast } from 'react-toastify';
@@ -8,7 +8,9 @@ import { FaRegRegistered } from 'react-icons/fa';
 const LoginNavbar = () => {
 
      const { user, logout } = useContext(AuthContext);
+     const [toggle, setToggle]=useState(false)
 
+     // console.log(toggle)
      const Navigate = useNavigate();
 
      // লগআউট হ্যান্ডলার
@@ -23,10 +25,13 @@ const LoginNavbar = () => {
                     console.error(error);
                });
      };
+
+
      return (
-          <div className='flex edu-sa-hand text-white border-2 border-white'>
+          <div className='fixed top-0 w-full z-40 flex edu-sa-hand bg-white border-2 border-white'>
                <div className='md:flex-1'></div>
                <div className='flex md:gap-4 gap-2 items-center my-2 mx-5'>
+                    <input onClick={() => setToggle(!toggle)} type="checkbox" defaultChecked className="toggle" />
                     <div>
                          {!user?.email && (
                               <><Link

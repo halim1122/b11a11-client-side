@@ -26,7 +26,7 @@ const AssignmentCard = ({ assignment, handleRemove }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         if (user?.email === creatorEmail) {
-          axios.delete(`http://localhost:3000/assignment/${id}`)
+          axios.delete(`${import.meta.env.VITE_API}/assignment/${id}`)
             .then(res => {
               if (res.data.deletedCount) {
                 Swal.fire({

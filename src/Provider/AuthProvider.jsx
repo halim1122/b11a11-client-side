@@ -42,16 +42,20 @@ const AuthProvider = ({ children }) => {
      useEffect(() => {
           const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
                setUser(currentUser);
-               setLoading(false);
 
-               axios.post('http://localhost:3000/jwt', { email: currentUser.email }, { withCredentials: true })
+               if(currentUser?.email){
+                    axios.post(`${import.meta.env.VITE_API}/jwt`, { email: currentUser.email }, { withCredentials: true })
                     .then(res => {
                          if (res.data?.success) {
-                              console.log('✅ JWT set successfully', res?.data);
-                              alert('Except All Cookies')
+                              console.log(' JWT set successfully', res?.data);
                          }
                     })
                     .catch(error => console.log('❌ Error setting JWT:', error))
+               }
+
+
+               setLoading(false);
+
           });
           return () => {
                unsubscribe();

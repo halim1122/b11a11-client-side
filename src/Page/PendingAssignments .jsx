@@ -3,16 +3,16 @@ import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import GiveMarkModal from "./GiveMarkModal";
 import { Helmet } from "react-helmet-async";
-
+import Loading from '../Auth/Loading';
 const PendingAssignments = () => {
   const { user } = useContext(AuthContext);
   const [submissions, setSubmissions] = useState([]);
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    if (!user?.email) return;
+    if (!user?.email) return <Loading/>
 
-    axios.get(`http://localhost:3000/submissions?status=pending`)
+    axios.get(`${import.meta.env.VITE_API}/submissions?status=pending`)
       .then(res => {
         setSubmissions(res.data);
       })

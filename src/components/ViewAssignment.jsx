@@ -40,7 +40,7 @@ const ViewAssignment = () => {
     };
 
     try {
-      const res = await axios.post(`http://localhost:3000/submissions`, submissionData);
+      const res = await axios.post(`${import.meta.env.VITE_API}/submissions`, submissionData);
       if (res.data.insertedId) {
         Swal.fire("Success!", "Assignment submitted successfully!", "success");
         setOpen(false);

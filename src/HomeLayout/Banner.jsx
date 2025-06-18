@@ -5,7 +5,7 @@ import bannerImg from '../../src/assets/ChatGPT Image Jun 16, 2025, 04_51_47 PM.
 
 const Banner = () => {
   return (
-    <div className="bg-[#f8f9ff] py-12 px-4 md:px-20 flex flex-col md:flex-row items-center gap-10">
+    <div className="bg-[#f8f9ff] mt-30 py-12 px-4 md:px-20 flex flex-col md:flex-row items-center gap-10">
       {/* Text Section */}
       <motion.div
         className="flex-1"

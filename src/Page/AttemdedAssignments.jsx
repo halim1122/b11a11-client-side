@@ -11,7 +11,7 @@ const MySubmittedAssignments = () => {
     if (!user?.email) return;
 
     axios
-      .get("http://localhost:3000/submissions", {
+      .get(`${import.meta.env.VITE_API}/submissions`, {
         params: {
           submittedBy: user.email,  // user এর সাবমিশন আনতে
         },

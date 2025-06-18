@@ -18,7 +18,7 @@ const Navbar = () => {
           <li><NavLink to='/attemded-assignments'>My Attempted Assignments</NavLink></li>
      </>
      return (
-          <div className='w-11/12 mx-auto text-white'>
+          <div className=' w-11/12 mx-auto text-white'>
                <div className="flex justify-between navbar items-center">
                     <div className='flex items-center'>
                          <div>

@@ -44,7 +44,7 @@ const Update = () => {
                     confirmButtonText: "Yes"
                }).then((result) => {
                     if (result.isConfirmed) {
-                         axios.put(`http://localhost:3000/assignment/${_id}`, assignment)
+                         axios.put(`${import.meta.env.VITE_API}/assignment/${_id}`, assignment)
                               .then(() => {
                                    navigate('/assignments');
                                    Swal.fire({

@@ -17,7 +17,7 @@ const GiveMarkModal = ({ submission, setSelected, refreshData }) => {
     };
 
     try {
-      const res = await axios.patch(`http://localhost:3000/submissions/${submission._id}`, updated);
+      const res = await axios.patch(`${import.meta.env.VITE_API}/submissions/${submission._id}`, updated);
       if (res.data.modifiedCount > 0) {
         Swal.fire("Success", "Assignment marked successfully!", "success");
         refreshData();
