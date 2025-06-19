@@ -27,9 +27,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'assignments',
-        loader: () => fetch(`${import.meta.env.VITE_API}/assignments`, {
-          credentials: 'include'
-        }),
+        loader: () => fetch(`${import.meta.env.VITE_API}/assignments`),
         hydrateFallbackElement: <Loading />,
         Component: Assignments
       },

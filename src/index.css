@@ -3,12 +3,16 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-.edu-sa-hand{
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+.edu-sa-hand {
   font-family: "Edu SA Hand", cursive;
   font-optical-sizing: auto;
 }
 
 a.active {
-     text-decoration: underline;
-     font-weight: bold;
+  text-decoration: underline;
+  font-weight: bold;
 }

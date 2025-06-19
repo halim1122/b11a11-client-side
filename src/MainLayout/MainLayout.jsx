@@ -7,17 +7,18 @@ import LoginNavbar from '../Page/LoginNavbar';
 const MainLayout = () => {
      return (
           <div>
-               <LoginNavbar></LoginNavbar>
-               <header className='shadow fixed top-[56px] w-full z-40 bg-[#342995]'>
-                    <Navbar></Navbar>
+               <LoginNavbar />
+               <header className="shadow fixed top-[56px] w-full z-40 bg-primary">
+                    <Navbar />
                </header>
-              <div className='w-11/12 mx-auto mt-30'>
-                <Outlet></Outlet>
-              </div>
+               <div className="w-11/12 mx-auto mt-32">
+                    <Outlet />
+               </div>
                <footer>
-                    <Footer></Footer>
+                    <Footer />
                </footer>
           </div>
+
      );
 };
 

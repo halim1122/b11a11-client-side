@@ -65,77 +65,79 @@ const Update = () => {
           }
      }
      return (
-          <div className='max-w-xl mx-auto p-6 bg-white rounded my-3 shadow-2xl shadow-[#342995]'>
-               <Helmet>
-                         <title>
-                              update-assignments
-                         </title>
-                    </Helmet>
-               <h2 className='text-2xl font-bold mb-4 text-center text-[#342995]'>Update Your Assignment</h2>
+          <div className='max-w-xl mx-auto p-6 bg-base-100 rounded mb-6 mt-36 shadow-2xl shadow-primary'>
+  <Helmet>
+    <title>update-assignments</title>
+  </Helmet>
 
-               <form onSubmit={handleUpDateAssignment} className='space-y-4'>
+  <h2 className='text-2xl font-bold mb-4 text-center text-primary'>Update Your Assignment</h2>
 
-                    <input
-                         name="title"
-                         defaultValue={title}
-                         type="text"
-                         placeholder="Assignment Title"
-                         className="input input-bordered w-full"
-                         required
-                    />
+  <form onSubmit={handleUpDateAssignment} className='space-y-4'>
 
-                    <textarea
-                         name="description"
-                         defaultValue={description}
-                         placeholder="Description"
-                         className="textarea textarea-bordered w-full"
-                         required
-                    ></textarea>
+    <input
+      name="title"
+      defaultValue={title}
+      type="text"
+      placeholder="Assignment Title"
+      className="input input-bordered w-full"
+      required
+    />
 
-                    <input
-                         name="marks"
-                         defaultValue={marks}
-                         type="number"
-                         placeholder="Marks"
-                         className="input input-bordered w-full"
-                         required
-                    />
+    <textarea
+      name="description"
+      defaultValue={description}
+      placeholder="Description"
+      className="textarea textarea-bordered w-full"
+      required
+    ></textarea>
 
-                    <input
-                         name="thumbnail"
-                         defaultValue={thumbnail}
-                         type="url"
-                         placeholder="Thumbnail Image URL"
-                         className="input input-bordered w-full"
-                         required
-                    />
+    <input
+      name="marks"
+      defaultValue={marks}
+      type="number"
+      placeholder="Marks"
+      className="input input-bordered w-full"
+      required
+    />
 
-                    <select
-                         name="level"
-                         className="select select-bordered w-full"
-                         defaultValue={level}
-                         required
-                    >
-                         <option value="easy">Easy</option>
-                         <option value="medium">Medium</option>
-                         <option value="hard">Hard</option>
-                    </select>
+    <input
+      name="thumbnail"
+      defaultValue={thumbnail}
+      type="url"
+      placeholder="Thumbnail Image URL"
+      className="input input-bordered w-full"
+      required
+    />
 
-                    <div>
-                         <label className="font-medium mb-1 block">Due Date</label>
-                         <DatePicker
-                              selected={dueDate}
-                              defaultValue={date}
-                              onChange={(date) => setDueDate(date)}
-                              className="input input-bordered w-full"
-                              dateFormat="yyyy/MM/dd"
-                              required
-                         />
-                    </div>
+    <select
+      name="level"
+      className="select select-bordered w-full"
+      defaultValue={level}
+      required
+    >
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
 
-                    <button type="submit" className="btn btn-primary w-full">UpDate Assignment</button>
-               </form>
-          </div>
+    <div>
+      <label className="font-medium mb-1 block">Due Date</label>
+      <DatePicker
+        selected={dueDate}
+        defaultValue={date}
+        onChange={(date) => setDueDate(date)}
+        className="input input-bordered w-full"
+        dateFormat="yyyy/MM/dd"
+        required
+      />
+    </div>
+
+    <button type="submit" className="btn btn-primary w-full">
+      Update Assignment
+    </button>
+  </form>
+</div>
+
      );
 };
 

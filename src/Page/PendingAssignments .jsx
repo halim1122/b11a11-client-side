@@ -4,13 +4,14 @@ import axios from "axios";
 import GiveMarkModal from "./GiveMarkModal";
 import { Helmet } from "react-helmet-async";
 import Loading from '../Auth/Loading';
+
 const PendingAssignments = () => {
   const { user } = useContext(AuthContext);
   const [submissions, setSubmissions] = useState([]);
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    if (!user?.email) return <Loading/>
+    if (!user?.email) return; // Avoid rendering Loading inside useEffect
 
     axios.get(`${import.meta.env.VITE_API}/submissions?status=pending`)
       .then(res => {
@@ -19,23 +20,24 @@ const PendingAssignments = () => {
       .catch(err => {
         console.error("Failed to fetch submissions:", err);
       });
-  }, [user?.email]);
+  }, [user]);
+
+  if (!user?.email) return <Loading />; // Show loading while user data is loading
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-     <Helmet>
-          <title>
-               pending-assignments
-          </title>
-     </Helmet>
+      <Helmet>
+        <title>Pending Assignments</title>
+      </Helmet>
+
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-6 text-center sm:text-left">
         Pending Assignments
       </h2>
 
       {submissions.length > 0 ? (
-        <div className="overflow-x-auto bg-white shadow rounded-lg">
+        <div className="overflow-x-auto bg-base-100 shadow rounded-lg">
           <table className="min-w-full table-auto text-sm sm:text-base">
-            <thead className="bg-primary text-white">
+            <thead className="bg-primary text-primary-content">
               <tr>
                 <th className="p-3 sm:p-4 text-left">Title</th>
                 <th className="p-3 sm:p-4 text-left">Marks</th>
@@ -45,7 +47,10 @@ const PendingAssignments = () => {
             </thead>
             <tbody>
               {submissions.map((sub) => (
-                <tr key={sub._id} className="border-b hover:bg-gray-50 transition-all">
+                <tr
+                  key={sub._id}
+                  className="border-b hover:bg-base-200 transition-all"
+                >
                   <td className="p-3 sm:p-4">{sub.assignmentTitle ?? "Untitled"}</td>
                   <td className="p-3 sm:p-4">{sub.marks ?? "N/A"}</td>
                   <td className="p-3 sm:p-4 break-words">{sub.submittedBy ?? "Unknown"}</td>
@@ -53,7 +58,7 @@ const PendingAssignments = () => {
                     {sub.submittedBy !== user.email ? (
                       <button
                         onClick={() => setSelected(sub)}
-                        className="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-md text-sm"
+                        className="btn btn-success btn-sm"
                       >
                         Give Mark
                       </button>

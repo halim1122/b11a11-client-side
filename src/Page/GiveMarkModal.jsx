@@ -29,17 +29,25 @@ const GiveMarkModal = ({ submission, setSelected, refreshData }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 px-4">
-      <div className="bg-white w-full max-w-md sm:max-w-lg p-6 rounded-xl">
+    <div className="fixed inset-0 bg-base-300 bg-opacity-60 flex items-center justify-center z-50 px-4">
+      <div className="bg-base-100 w-full max-w-md sm:max-w-lg p-6 rounded-xl shadow">
         <h2 className="text-xl font-bold mb-4 text-primary">Mark Assignment</h2>
-        <div className="text-sm sm:text-base space-y-2">
+
+        <div className="text-sm sm:text-base space-y-2 text-base-content">
           <p>
             <strong>Google Docs:</strong>{" "}
-            <a href={submission.docsLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline break-all">
+            <a
+              href={submission.docsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link link-primary break-all"
+            >
               View Document
             </a>
           </p>
-          <p><strong>Note:</strong> {submission.note || "No notes provided."}</p>
+          <p>
+            <strong>Note:</strong> {submission.note || "No notes provided."}
+          </p>
         </div>
 
         <form onSubmit={handleMark} className="mt-4 space-y-3">
@@ -49,26 +57,26 @@ const GiveMarkModal = ({ submission, setSelected, refreshData }) => {
             placeholder="Enter marks"
             value={givenMark}
             onChange={(e) => setGivenMark(e.target.value)}
-            className="w-full px-4 py-2 border rounded text-sm sm:text-base"
+            className="input input-bordered w-full"
           />
           <textarea
             rows="3"
             placeholder="Feedback"
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
-            className="w-full px-4 py-2 border rounded text-sm sm:text-base"
+            className="textarea textarea-bordered w-full"
           />
           <div className="flex justify-end gap-3">
             <button
               onClick={() => setSelected(null)}
               type="button"
-              className="px-4 py-2 border rounded hover:bg-gray-100 text-sm"
+              className="btn btn-outline btn-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2 bg-primary text-white rounded hover:bg-indigo-800 text-sm"
+              className="btn btn-primary btn-sm"
             >
               Submit
             </button>
@@ -76,6 +84,7 @@ const GiveMarkModal = ({ submission, setSelected, refreshData }) => {
         </form>
       </div>
     </div>
+
   );
 };
 

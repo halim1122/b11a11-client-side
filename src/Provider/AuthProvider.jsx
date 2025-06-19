@@ -2,8 +2,6 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import React, { createContext, useEffect } from 'react';
 import { auth } from '../firebase/firebase.init';
 import { useState } from 'react';
-import axios from 'axios';
-import Swal from 'sweetalert2';
 
 export const AuthContext = createContext(null);
 
@@ -42,19 +40,16 @@ const AuthProvider = ({ children }) => {
      useEffect(() => {
           const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
                setUser(currentUser);
-
-               if(currentUser?.email){
-                    axios.post(`${import.meta.env.VITE_API}/jwt`, { email: currentUser.email }, { withCredentials: true })
-                    .then(res => {
-                         if (res.data?.success) {
-                              console.log(' JWT set successfully', res?.data);
-                         }
-                    })
-                    .catch(error => console.log('❌ Error setting JWT:', error))
-               }
-
-
                setLoading(false);
+               // if(currentUser?.email){
+               //      axios.post(`${import.meta.env.VITE_API}/jwt`, { email: currentUser.email }, { withCredentials: true })
+               //      .then(res => {
+               //           if (res.data?.success) {
+               //                console.log(' JWT set successfully', res?.data);
+               //           }
+               //      })
+               //      .catch(error => console.log('❌ Error setting JWT:', error))
+               // }
 
           });
           return () => {

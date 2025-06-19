@@ -5,7 +5,7 @@ import LogoImg from '../../src/assets/ChatGPT Image Jun 16, 2025, 05_08_07 PM.pn
 
 const Navbar = () => {
 
-     const {user}=useContext(AuthContext);
+     const { user } = useContext(AuthContext);
 
      // console.log(`${import.meta.env.VITE_API}`)
      const links = <>
@@ -18,25 +18,25 @@ const Navbar = () => {
           <li><NavLink to='/attemded-assignments'>My Attempted Assignments</NavLink></li>
      </>
      return (
-          <div className=' w-11/12 mx-auto text-white'>
+          <div className="w-11/12 mx-auto text-white">
                <div className="flex justify-between navbar items-center">
-                    <div className='flex items-center'>
-                         <div>
-                              <img className='w-12 h-12 hidden md:flex' src={LogoImg} alt="" />
-                         </div>
-                         <a className="text-md md:text-xl edu-sa-hand">BrainBand</a>
+                    {/* Logo and Site Name */}
+                    <div className="flex items-center gap-2">
+                         <img className="w-12 h-12 hidden md:flex" src={LogoImg} alt="Logo" />
+                         <a className="text-md md:text-xl font-bold">BrainBand</a>
                     </div>
-                    <div className='hidden md:flex'>
-                         <ul
-                              tabIndex={0}
-                              className='flex gap-4'
-                         >
-                              {links}
-                         </ul>
+
+                    {/* Desktop Nav Links */}
+                    <div className="hidden md:flex">
+                         <ul tabIndex={0} className="flex gap-4">{links}</ul>
                     </div>
                     <div>
                          <div className="dropdown dropdown-end">
-                              <div tabIndex={0} role="button" className="w-auto relative group flex justify-end items-center gap-3 mt-0">
+                              <div
+                                   tabIndex={0}
+                                   role="button"
+                                   className="w-auto relative group flex justify-end items-center gap-3"
+                              >
                                    {user ? (
                                         <div>
                                              <img
@@ -44,7 +44,7 @@ const Navbar = () => {
                                                   src={user.photoURL}
                                                   alt="User"
                                              />
-                                             <div className="absolute -top-[30px] md:-top-[26px] -left-40 md:-left-40 transform translate-x-1/2 translate-y-full p-2 bg-black text-white text-xs rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                             <div className="absolute -top-[30px] md:-top-[26px] -left-40 md:-left-40 transform translate-x-1/2 translate-y-full p-2 bg-neutral text-neutral-content text-xs rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                                   {user.displayName}
                                              </div>
                                         </div>
@@ -52,23 +52,22 @@ const Navbar = () => {
                                         <img
                                              className="rounded-full md:h-10 h-8 w-8 md:w-10 object-cover"
                                              src="https://i.ibb.co/HLcVYWvt/149071.png"
-                                             alt="User"
+                                             alt="Guest"
                                         />
                                    )}
                               </div>
                               <ul
                                    tabIndex={0}
-                                   className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                   <div className='md:hidden'>
-                                        {links}
-                                   </div>
+                                   className="menu menu-sm dropdown-content bg-base-100 text-base-content rounded-box z-1 mt-3 w-52 p-2 shadow"
+                              >
+                                   <div className="md:hidden">{links}</div>
                                    {links2}
-
                               </ul>
                          </div>
                     </div>
                </div>
           </div>
+
      );
 };
 
