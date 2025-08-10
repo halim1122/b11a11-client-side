@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const MySubmittedAssignments = () => {
   const { user } = useContext(AuthContext);
@@ -37,8 +38,8 @@ const MySubmittedAssignments = () => {
   <h2 className="text-2xl font-bold mb-6 text-primary">
     My Submitted Assignments
   </h2>
-
-  {assignments.length > 0 ? (
+{assignments.length === 0 ? <p className="text-base-content/50">No submitted assignments found.</p> :
+(
     <div className="overflow-x-auto bg-base-100 border border-gray-300 shadow rounded-lg">
       <table className="table w-full table-zebra">
         <thead className="bg-primary text-primary-content">
@@ -68,11 +69,11 @@ const MySubmittedAssignments = () => {
         </tbody>
       </table>
     </div>
-  ) : (
-    <p className="text-base-content/50">No submitted assignments found.</p>
-  )}
-</div>
-  );
-};
+  )
+}
+  </div>
+   ) };
 
 export default MySubmittedAssignments;
+
+

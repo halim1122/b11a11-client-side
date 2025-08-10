@@ -62,55 +62,62 @@ const AssignmentCard = ({ assignment, handleRemove }) => {
   };
 
   return (
-    <div className="bg-base-100 shadow border border-primary rounded-2xl overflow-hidden p-4 max-w-3xl mx-auto transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
-      {/* Thumbnail + Info */}
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
-        <img
-          src={thumbnail}
-          alt={title}
-          className="w-full md:w-44 h-30 object-cover rounded-xl"
-        />
+   <div className="bg-white w-full rounded-2xl border border-gray-200 shadow-lg overflow-hidden max-w-sm mx-auto transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+  {/* Thumbnail */}
+  <div className="overflow-hidden">
+    <img
+      src={thumbnail}
+      alt={title}
+      className="w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105"
+    />
+  </div>
 
-        <div className="flex-1">
-          <h2 className="text-xl font-semibold text-primary">{title}</h2>
-          <p className="text-base mt-1">
-            Marks: <span className="font-semibold text-primary">{marks}</span>
-          </p>
-          <p className="text-sm mt-1">
-            Level:{" "}
-            <span
-              className={`px-3 py-1 rounded font-medium ${levelClass[level] || "bg-base-300"}`}
-            >
-              {level}
-            </span>
-          </p>
-        </div>
-      </div>
+  {/* Content */}
+  <div className="p-5 space-y-4">
+    {/* Title */}
+    <h2 className="text-xl font-bold text-gray-800 text-center">{title}</h2>
 
-      {/* Action Buttons */}
-      <div className="mt-4 flex flex-wrap justify-center gap-2">
-        <Link
-          to={user ? `/assignment/${_id}` : "/auth/login"}
-          className="btn btn-sm btn-outline btn-primary flex items-center gap-2 px-4 py-2 rounded-full"
-        >
-          <FaEye /> View
-        </Link>
-
-        <Link
-          to={user ? `/assignment/update/${_id}` : "/auth/login"}
-          className="btn btn-sm btn-outline btn-primary flex items-center gap-2 px-4 py-2 rounded-full"
-        >
-          <FaEdit /> Update
-        </Link>
-
-        <button
-          onClick={() => (user ? handleDelete(_id) : navigate("/auth/login"))}
-          className="btn btn-sm btn-outline btn-error flex items-center gap-2 px-4 py-2 rounded-full"
-        >
-          <FaTrashAlt /> Delete
-        </button>
-      </div>
+    {/* Marks & Level */}
+    <div className="flex justify-between items-center">
+      <p className="text-gray-600">
+        Marks: <span className="font-semibold text-indigo-600">{marks}</span>
+      </p>
+      <span
+        className={`px-3 py-1 rounded-full text-sm font-medium ${
+          levelClass[level] || "bg-gray-100 text-gray-700"
+        }`}
+      >
+      {level}
+      </span>
     </div>
+  </div>
+
+  {/* Action Buttons */}
+  <div className=" join flex justify-center mb-4 border-t border-gray-100 pt-4">
+    <Link
+      to={`/assignment/${_id}`}
+      className="btn join-item bg-indigo-50 text-indigo-600 hover:bg-indigo-100 flex items-center px-8 border border-gray-300"
+    >
+      <FaEye />
+    </Link>
+
+    <Link
+      to={user ? `/assignment/update/${_id}` : "/auth/login"}
+      className="btn join-item bg-indigo-50 text-indigo-600 hover:bg-indigo-100 flex items-center px-8 border border-gray-300"
+    >
+      <FaEdit />
+    </Link>
+
+    <button
+      onClick={() => (user ? handleDelete(_id) : navigate("/auth/login"))}
+      className="btn join-item bg-red-50 text-red-600 hover:bg-red-100 flex items-center px-8 border border-gray-300"
+    >
+      <FaTrashAlt />
+    </button>
+  </div>
+</div>
+
+
   );
 };
 

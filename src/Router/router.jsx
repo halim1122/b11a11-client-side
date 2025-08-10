@@ -13,6 +13,8 @@ import AttemdedAssignments from "../Page/AttemdedAssignments";
 import AuthLayout from "../Auth/AuthLayout";
 import Register from "../Auth/Register";
 import Login from "../Auth/Login";
+import LoadingSpinner from "../components/LoadingSpinner";
+import AboutUs from "../components/AboutUs";
 
 
 
@@ -28,19 +30,23 @@ export const router = createBrowserRouter([
       {
         path: 'assignments',
         loader: () => fetch(`${import.meta.env.VITE_API}/assignments`),
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <LoadingSpinner />,
         Component: Assignments
+      },
+      {
+        path:'about-Us',
+        Component: AboutUs
       },
       {
         path: 'assignment/update/:id',
         loader: ({ params }) => fetch(`${import.meta.env.VITE_API}/assignment/${params.id}`),
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <LoadingSpinner/>,
         Component: Update
       },
       {
         path: 'assignment/:id',
         loader: ({ params }) => fetch(`${import.meta.env.VITE_API}/assignment/${params.id}`),
-        hydrateFallbackElement: <Loading />,
+        hydrateFallbackElement: <LoadingSpinner />,
         Component: ViewAssignment
       },
       {

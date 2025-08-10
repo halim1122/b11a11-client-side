@@ -1,34 +1,43 @@
 import { NavLink } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import LogoImg from '../../src/assets/ChatGPT Image Jun 16, 2025, 05_08_07 PM.png';
+import { IoMenu } from "react-icons/io5";
+import { RiChatDeleteLine } from "react-icons/ri";
 
 const Navbar = () => {
 
      const { user } = useContext(AuthContext);
+     const [manu, setManu] = useState(false);
 
      // console.log(`${import.meta.env.VITE_API}`)
      const links = <>
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/assignments'>Assignments</NavLink></li>
-          {user && <li><NavLink to='/pending-assignments'>Pending Assignments</NavLink></li>}
+          <li><NavLink to='/about-Us'>About Us</NavLink></li>
      </>
-     const links2 = <>
+     const links2 = <>{user &&<>
+          <li><NavLink to='/pending-assignments'>Pending Assignments</NavLink></li>
           <li><NavLink to='/create-assignment'>Create Assignment</NavLink></li>
           <li><NavLink to='/attemded-assignments'>My Attempted Assignments</NavLink></li>
-     </>
+     </>}</>
      return (
           <div className="w-11/12 mx-auto text-white">
                <div className="flex justify-between navbar items-center">
                     {/* Logo and Site Name */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center relative gap-2">
+                         <button className='md:hidden' onClick={() => setManu(!manu)}>{manu ? <RiChatDeleteLine className='h-6 w-6' /> : <IoMenu className='h-6 w-6' />}</button>
                          <img className="w-12 h-12 hidden md:flex" src={LogoImg} alt="Logo" />
                          <a className="text-md md:text-xl font-bold">BrainBand</a>
+                    </div>
+                    {/* Phone Nav Links */}
+                    <div className={`absolute md:hidden p-4 rounded-lg bg-blue-400 transition-all duration-300 ease-in-out ${manu ? `top-17 left-5` : `-top-40 -left-80`}`}>
+                    {links}{links2}
                     </div>
 
                     {/* Desktop Nav Links */}
                     <div className="hidden md:flex">
-                         <ul tabIndex={0} className="flex gap-4">{links}</ul>
+                         <ul tabIndex={0} className="flex gap-4">{links}{links2}</ul>
                     </div>
                     <div>
                          <div className="dropdown dropdown-end">
@@ -40,13 +49,11 @@ const Navbar = () => {
                                    {user ? (
                                         <div>
                                              <img
-                                                  className="rounded-full md:h-10 h-7 w-7 md:w-10 object-cover"
-                                                  src={user.photoURL}
-                                                  alt="User"
+                                                  className="w-10 h-10 rounded-full object-cover"
+                                                  src={user?.photoURL}
+                                                  alt="Profile"
+                                                  title={user?.displayName}
                                              />
-                                             <div className="absolute -top-[30px] md:-top-[26px] -left-40 md:-left-40 transform translate-x-1/2 translate-y-full p-2 bg-neutral text-neutral-content text-xs rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                  {user.displayName}
-                                             </div>
                                         </div>
                                    ) : (
                                         <img
@@ -56,13 +63,7 @@ const Navbar = () => {
                                         />
                                    )}
                               </div>
-                              <ul
-                                   tabIndex={0}
-                                   className="menu menu-sm dropdown-content bg-base-100 text-base-content rounded-box z-1 mt-3 w-52 p-2 shadow"
-                              >
-                                   <div className="md:hidden">{links}</div>
-                                   {links2}
-                              </ul>
+
                          </div>
                     </div>
                </div>
