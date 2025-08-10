@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 const Banner = () => {
   return (
-    <div className="bg-base-200 mb-20 text-base-content mt-30 py-12 px-4 md:px-20 flex flex-col md:flex-row items-center gap-10">
+    <div className="bg-base-300 mb-20 text-base-content mt-30 py-12 px-4 md:px-20 flex flex-col md:flex-row items-center gap-10">
       
       {/* Text Section */}
       <motion.div

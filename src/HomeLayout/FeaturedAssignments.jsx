@@ -48,10 +48,10 @@ const FeaturedAssignments = () => {
       {/* Card Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
         {currentAssignments.map((assignment) => (
-          <div key={assignment.id} className="bg-white rounded-lg shadow-md p-5 flex flex-col items-start gap-3 hover:shadow-lg transition-shadow duration-300">
+          <div key={assignment.id} className="border border-gray-100 rounded-lg shadow-md p-5 flex flex-col items-start gap-3 hover:shadow-lg transition-shadow duration-300">
             <div>{assignment.icon}</div>
             <h3 className="text-lg font-semibold">{assignment.title}</h3>
-            <p className="text-gray-600 text-sm">{assignment.description}</p>
+            <p className="text-gray-400 text-sm">{assignment.description}</p>
           </div>
         ))}
       </div>
