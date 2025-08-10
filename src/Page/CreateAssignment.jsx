@@ -44,7 +44,7 @@ const CreateAssignment = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-base-100 mb-6 mt-36 rounded shadow-2xl">
+    <div className="max-w-xl border border-gray-300 mx-auto p-6 bg-base-100 mb-6 mt-36 rounded shadow-3xl">
       <Helmet>
         <title>Create Assignment</title>
       </Helmet>

@@ -25,7 +25,7 @@ const PendingAssignments = () => {
   if (!user?.email) return <Loading />; // Show loading while user data is loading
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="max-w-[2100px] min-h-screen mx-auto px-4 py-10">
       <Helmet>
         <title>Pending Assignments</title>
       </Helmet>
@@ -35,7 +35,7 @@ const PendingAssignments = () => {
       </h2>
 
       {submissions.length > 0 ? (
-        <div className="overflow-x-auto bg-base-100 shadow rounded-lg">
+        <div className="overflow-x-auto bg-base-100 border border-gray-300 shadow rounded-lg">
           <table className="min-w-full table-auto text-sm sm:text-base">
             <thead className="bg-primary text-primary-content">
               <tr>

@@ -43,7 +43,7 @@ const LoginNavbar = () => {
                               >
                                    Register
                               </Link>
-                              <a className="btn btn-accent md:px-3 px-1 rounded-full text-white md:h-10 h-8 w-8 md:w-10 md:hidden">
+                              <a className="btn text-blue-700 border border-blue-700 md:px-3 px-1 rounded-full md:h-10 h-8 w-8 md:w-10 md:hidden">
                                    <FaRegRegistered />
                               </a>
                          </>
@@ -54,11 +54,11 @@ const LoginNavbar = () => {
                          <div onClick={handleLogout} className="cursor-pointer">
                               <Link
                                    to="/auth/login"
-                                   className="btn btn-success rounded-full hidden md:flex px-7 text-sm text-primary-content"
+                                   className="btn border border-gray-300 bg-blue-700 rounded-full hidden md:flex px-7 text-sm text-primary-content"
                               >
                                    Logout
                               </Link>
-                              <a className="btn btn-accent md:px-3 px-1 rounded-full text-white md:h-10 h-8 w-8 md:w-10 md:hidden">
+                              <a className="btn border border-gray-300 bg-blue-700 md:px-3 px-1 rounded-full text-white md:h-10 h-8 w-8 md:w-10 md:hidden">
                                    <LuLogOut />
                               </a>
                          </div>
@@ -66,11 +66,11 @@ const LoginNavbar = () => {
                          <>
                               <Link
                                    to="/auth/login"
-                                   className="btn btn-success rounded-full hidden md:flex px-7 text-sm text-primary-content"
+                                   className="btn border border-gray-300 bg-blue-700 rounded-full hidden md:flex px-7 text-sm text-primary-content"
                               >
                                    Login
                               </Link>
-                              <a className="btn btn-accent md:px-3 px-1 rounded-full text-white md:h-10 h-8 w-8 md:w-10 md:hidden">
+                              <a className="btn bg-blue-700 md:px-3 px-1 rounded-full text-white md:h-10 h-8 w-8 md:w-10 md:hidden">
                                    <LuLogIn />
                               </a>
                          </>

@@ -26,17 +26,17 @@ const Navbar = () => {
                <div className="flex justify-between navbar items-center">
                     {/* Logo and Site Name */}
                     <div className="flex items-center relative gap-2">
-                         <button className='md:hidden' onClick={() => setManu(!manu)}>{manu ? <RiChatDeleteLine className='h-6 w-6' /> : <IoMenu className='h-6 w-6' />}</button>
+                         <button className='lg:hidden' onClick={() => setManu(!manu)}>{manu ? <RiChatDeleteLine className='h-6 w-6' /> : <IoMenu className='h-6 w-6' />}</button>
                          <img className="w-12 h-12 hidden md:flex" src={LogoImg} alt="Logo" />
                          <a className="text-md md:text-xl font-bold">BrainBand</a>
                     </div>
                     {/* Phone Nav Links */}
-                    <div className={`absolute md:hidden p-4 rounded-lg bg-blue-400 transition-all duration-300 ease-in-out ${manu ? `top-17 left-5` : `-top-40 -left-80`}`}>
+                    <div className={`absolute lg:hidden p-4 rounded-lg bg-blue-400 transition-all duration-300 ease-in-out ${manu ? `top-17 left-5` : `-top-40 -left-80`}`}>
                     {links}{links2}
                     </div>
 
                     {/* Desktop Nav Links */}
-                    <div className="hidden md:flex">
+                    <div className="hidden lg:flex">
                          <ul tabIndex={0} className="flex gap-4">{links}{links2}</ul>
                     </div>
                     <div>
