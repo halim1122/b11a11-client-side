@@ -1,4 +1,4 @@
-import { FaTasks, FaUsers, FaPenFancy, FaChartLine } from "react-icons/fa";
+import { FaTasks, FaUsers, FaPenFancy, FaChartLine, FaBell } from "react-icons/fa";
 
 const FeatureSection = () => {
   const features = [
@@ -22,13 +22,23 @@ const FeatureSection = () => {
       description: "See your completed, pending, and graded assignments in one place.",
       icon: <FaChartLine className="text-3xl text-primary" />,
     },
+    {
+      title: "Collaboration Tools",
+      description: "Discuss assignments with peers and share resources directly on the platform.",
+      icon: <FaUsers className="text-3xl text-primary" />,
+    },
+    {
+      title: "Deadline Reminders",
+      description: "Get notified before submission dates so you never miss a deadline.",
+      icon: <FaBell className="text-3xl text-primary" />,
+    },
   ];
 
   return (
     <div className="py-12 bg-base-200 text-base-content transition-all">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center text-primary mb-10">Awesome Features</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
           {features.map((feature, index) => (
             <div
               key={index}
