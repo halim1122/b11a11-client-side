@@ -45,7 +45,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto my-10 p-6 rounded-xl shadow bg-base-100 text-base-content transition-all duration-300">
+    <div className="max-w-6xl mx-auto my-20 p-6 rounded-xl shadow-2xl bg-base-50 text-base-content transition-all duration-300">
       <h2 className="text-2xl font-bold mb-6 text-center text-primary">
         Frequently Asked Questions
       </h2>

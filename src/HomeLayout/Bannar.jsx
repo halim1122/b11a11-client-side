@@ -1,10 +1,10 @@
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import banner3 from '../assets/';
-import banner2 from '../../assets/banner/emma-fabbri-EYw0bkh9BVY-unsplash.jpg';
-import banner1 from '../../assets/banner/premium_photo-1661963989923-17181d237cef.jpg';
-import banner4 from '../../assets/banner/buildings-wallpaper-preview.jpg';
-import banner5 from '../../assets/banner/HD-wallpaper-beautiful-view-resort-ocean-sky-clouds-pool-sea-aunset-summer-nature-sunrise-spendor.jpg';
+import banner1 from '../assets/images5.jpg';
+import banner2 from '../assets/images2.jpg';
+import banner3 from '../assets/images3.jpeg';
+import banner4 from '../assets/images4.jpg';
+import banner5 from '../assets/images.jpeg';
 
 const Bannar = () => {
   return (
@@ -24,7 +24,7 @@ const Bannar = () => {
             <img
               src={img}
               alt={`Banner ${index + 1}`}
-              className="w-full h-[50vh] md:h-[100vh] object-cover"
+              className="w-full h-[50vh] md:h-[100vh] mb-0 object-cover"
               loading="lazy"
             />
           </div>
