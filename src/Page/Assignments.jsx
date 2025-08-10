@@ -1,53 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router'; // react-router-dom হচ্ছে সঠিক প্যাকেজ
+import axios from 'axios';
 import AssignmentCard from './AssignmentCard';
 import { Helmet } from 'react-helmet-async';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Assignments = () => {
-  const loadedAssignments = useLoaderData();
   const [assignments, setAssignments] = useState([]);
-  const [allAssignments, setAllAssignments] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10);
+  const [level, setLevel] = useState('');
   const [searchText, setSearchText] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const fetchAssignments = async (currentPage = 1) => {
+    try {
+      setLoading(true);
+      const res = await axios.get(`${import.meta.env.VITE_API}/assignments`, {
+        params: {
+          page: currentPage,
+          limit,
+          level,
+          search: searchText
+        }
+      });
+
+      setAssignments(res.data.data || []);
+      setTotalPages(res.data.pagination?.totalPages || 1);
+      setPage(currentPage);
+    } catch (error) {
+      console.error('Failed to fetch assignments:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (Array.isArray(loadedAssignments)) {
-      setAssignments(loadedAssignments);
-      setAllAssignments(loadedAssignments);
-    } else {
-      setAssignments([]);
-      setAllAssignments([]);
-    }
-  }, [loadedAssignments]);
+    fetchAssignments(page);
+  }, [page, level]);
 
-  // level দিয়ে ফিল্টার
-  const handleFilterByLevel = (e) => {
-    const level = e.target.value;
-    if (level === '') {
-      setAssignments(allAssignments);
-    } else {
-      const filtered = allAssignments.filter(item => item.level === level);
-      setAssignments(filtered);
-    }
-  };
-
-  // সার্চ সাবমিট হ্যান্ডলার
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (!searchText.trim()) {
-      setAssignments(allAssignments);
-      return;
-    }
-    const filtered = allAssignments.filter(item =>
-      item.title.toLowerCase().includes(searchText.toLowerCase())
-    );
-    setAssignments(filtered);
-    setSearchText('');
+    fetchAssignments(1);
   };
 
-  // ডিলিট হ্যান্ডলার
+  const handleFilterByLevel = (e) => {
+    setLevel(e.target.value);
+    setPage(1);
+  };
+
   const handleRemove = (id) => {
-    const remaining = assignments.filter(item => item._id !== id);
-    setAssignments(remaining);
+    setAssignments((prev) => prev.filter((a) => a._id !== id));
   };
 
   return (
@@ -55,16 +58,13 @@ const Assignments = () => {
       <Helmet>
         <title>Assignments</title>
       </Helmet>
-      <h2 className='text-3xl font-bold mb-6 text-center text-primary'>All Assignments</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-primary">All Assignments</h2>
 
-      <div className='flex flex-col md:flex-row justify-between items-center gap-4 mb-6'>
-        {/* Level Filter */}
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
         <select
           onChange={handleFilterByLevel}
-          name="level"
+          value={level}
           className="select select-bordered w-full max-w-xs"
-          defaultValue=""
-          aria-label="Filter assignments by level"
         >
           <option value="">All Levels</option>
           <option value="easy">Easy</option>
@@ -72,38 +72,29 @@ const Assignments = () => {
           <option value="hard">Hard</option>
         </select>
 
-        {/* Search Form */}
-        <form
-          onSubmit={handleSearchSubmit}
-          className="flex w-full max-w-lg"
-          role="search"
-          aria-label="Search assignments"
-        >
+        <form onSubmit={handleSearchSubmit} className="flex w-full max-w-lg">
           <input
             type="text"
             value={searchText}
-            onChange={e => setSearchText(e.target.value)}
+            onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search assignments..."
             className="input input-bordered flex-grow rounded-r-none"
           />
-          <button
-            type="submit"
-            className="btn btn-primary rounded-l-none"
-            aria-label="Submit search"
-          >
+          <button type="submit" className="btn btn-primary rounded-l-none">
             Search
           </button>
         </form>
       </div>
 
-      {/* Assignments Grid */}
-      {assignments.length === 0 ? (
+      {loading ? (
+       <LoadingSpinner/>
+      ) : assignments.length === 0 ? (
         <p className="text-center text-gray-500 dark:text-gray-400 text-lg mt-10">
           ❌ No assignments available.
         </p>
       ) : (
-        <div className="grid rid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-          {assignments.map(assignment => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+          {assignments.map((assignment) => (
             <AssignmentCard
               key={assignment._id}
               assignment={assignment}
@@ -112,6 +103,34 @@ const Assignments = () => {
           ))}
         </div>
       )}
+
+      <div className="flex justify-center items-center gap-2 mt-8">
+        <button
+          disabled={page === 1}
+          onClick={() => fetchAssignments(page - 1)}
+          className="px-3 py-1 rounded border border-gray-300 disabled:opacity-50"
+        >
+          Prev
+        </button>
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i + 1}
+            onClick={() => fetchAssignments(i + 1)}
+            className={`px-3 py-1 rounded border ${
+              page === i + 1 ? 'bg-blue-500 text-white' : 'border-gray-300'
+            }`}
+          >
+            {i + 1}
+          </button>
+        ))}
+        <button
+          disabled={page === totalPages}
+          onClick={() => fetchAssignments(page + 1)}
+          className="px-3 py-1 rounded border border-gray-300 disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

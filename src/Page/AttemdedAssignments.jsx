@@ -12,7 +12,7 @@ const MySubmittedAssignments = () => {
     if (!user?.email) return;
 
     axios
-      .get(`${import.meta.env.VITE_API}/submissions`,{
+      .get(`${import.meta.env.VITE_API}/submissions`, {
         headers: {
           authorization: `Bearer ${user?.accessToken}`
         }
@@ -31,48 +31,50 @@ const MySubmittedAssignments = () => {
 
   return (
     <div className="max-w-[2100px] min-h-screen mx-auto p-4">
-  <Helmet>
-    <title>my-submitted-assignments</title>
-  </Helmet>
+      <Helmet>
+        <title>my-submitted-assignments</title>
+      </Helmet>
 
-  <h2 className="text-2xl font-bold mb-6 text-primary">
-    My Submitted Assignments
-  </h2>
-{assignments.length === 0 ? <p className="text-base-content/50">No submitted assignments found.</p> :
-(
-    <div className="overflow-x-auto bg-base-100 border border-gray-300 shadow rounded-lg">
-      <table className="table w-full table-zebra">
-        <thead className="bg-primary text-primary-content">
-          <tr>
-            <th className="p-3 text-left whitespace-nowrap">Title</th>
-            <th className="p-3 text-left whitespace-nowrap">Status</th>
-            <th className="p-3 text-left whitespace-nowrap">Total Marks</th>
-            <th className="p-3 text-left whitespace-nowrap">Obtained Marks</th>
-            <th className="p-3 text-left whitespace-nowrap">Feedback</th>
-          </tr>
-        </thead>
-        <tbody>
-          {assignments.map((assignment) => (
-            <tr
-              key={assignment._id}
-              className="hover:bg-base-200 transition-all"
-            >
-              <td className="p-3">
-                {assignment.assignmentTitle || "Untitled"}
-              </td>
-              <td className="p-3 capitalize">{assignment.status}</td>
-              <td className="p-3">{assignment.marks ?? "--"}</td>
-              <td className="p-3">{assignment.givenMark ?? "--"}</td>
-              <td className="p-3">{assignment.feedback ?? "--"}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h2 className="text-2xl font-bold text-primary">
+        My Submitted Assignments
+      </h2>
+      {assignments.length === 0 ? <> <p className="text-base-content/50">No submitted assignments found.</p>
+        <LoadingSpinner /></> :
+        (
+          <div className="overflow-x-auto bg-base-100 border border-gray-300 shadow rounded-lg">
+            <table className="table w-full table-zebra">
+              <thead className="bg-primary text-primary-content">
+                <tr>
+                  <th className="p-3 text-left whitespace-nowrap">Title</th>
+                  <th className="p-3 text-left whitespace-nowrap">Status</th>
+                  <th className="p-3 text-left whitespace-nowrap">Total Marks</th>
+                  <th className="p-3 text-left whitespace-nowrap">Obtained Marks</th>
+                  <th className="p-3 text-left whitespace-nowrap">Feedback</th>
+                </tr>
+              </thead>
+              <tbody>
+                {assignments.map((assignment) => (
+                  <tr
+                    key={assignment._id}
+                    className="hover:bg-base-200 transition-all"
+                  >
+                    <td className="p-3">
+                      {assignment.assignmentTitle || "Untitled"}
+                    </td>
+                    <td className="p-3 capitalize">{assignment.status}</td>
+                    <td className="p-3">{assignment.marks ?? "--"}</td>
+                    <td className="p-3">{assignment.givenMark ?? "--"}</td>
+                    <td className="p-3">{assignment.feedback ?? "--"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )
+      }
     </div>
   )
-}
-  </div>
-   ) };
+};
 
 export default MySubmittedAssignments;
 

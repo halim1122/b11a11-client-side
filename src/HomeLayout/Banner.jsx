@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import bannerImg from '../../src/assets/ChatGPT Image Jun 16, 2025, 04_51_47 PM.png';
+import { Link } from 'react-router';
 
 const Banner = () => {
   return (
@@ -23,7 +24,9 @@ const Banner = () => {
           whileHover={{ scale: 1.05 }}
           className="btn btn-primary text-white xl:text-xl px-6 py-2 rounded-full"
         >
+          <Link to='/assignments'>
           Get Started
+          </Link>
         </motion.button>
       </motion.div>
 

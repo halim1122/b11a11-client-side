@@ -4,6 +4,7 @@ import axios from "axios";
 import GiveMarkModal from "./GiveMarkModal";
 import { Helmet } from "react-helmet-async";
 import Loading from '../Auth/Loading';
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const PendingAssignments = () => {
   const { user } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const PendingAssignments = () => {
       });
   }, [user]);
 
-  if (!user?.email) return <Loading />; // Show loading while user data is loading
+  if (!user?.email) return <LoadingSpinner />; // Show loading while user data is loading
 
   return (
     <div className="max-w-[2100px] min-h-screen mx-auto px-4 py-10">
@@ -63,7 +64,7 @@ const PendingAssignments = () => {
                         Give Mark
                       </button>
                     ) : (
-                      <span className="text-gray-400 italic text-sm">Own Submission</span>
+                    <span className="text-gray-400 italic text-sm">Own Submission</span>
                     )}
                   </td>
                 </tr>
@@ -72,8 +73,9 @@ const PendingAssignments = () => {
           </table>
         </div>
       ) : (
-        <p className="text-gray-500 text-center mt-10">No pending assignments found.</p>
-      )}
+        <><p className="text-gray-500 text-center mt-10">No pending assignments found.</p>
+        <LoadingSpinner />
+      </>)}
 
       {selected && (
         <GiveMarkModal

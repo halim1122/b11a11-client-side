@@ -15,6 +15,7 @@ import Register from "../Auth/Register";
 import Login from "../Auth/Login";
 import LoadingSpinner from "../components/LoadingSpinner";
 import AboutUs from "../components/AboutUs";
+import Error from "../Error";
 
 
 
@@ -76,5 +77,9 @@ export const router = createBrowserRouter([
         element: <Register />
       }
     ]
+  },
+  {
+    path: '/*',
+    element: <Error></Error>
   }
 ]);
