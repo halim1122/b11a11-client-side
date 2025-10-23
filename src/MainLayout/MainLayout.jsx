@@ -8,7 +8,7 @@ const MainLayout = () => {
      return (
           <div>
                <LoginNavbar />
-               <header className="shadow fixed top-[56px] mb-0 w-full z-40 bg-primary">
+               <header className="shadow fixed top-[56px] mb-0 w-full z-40 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-medium">
                     <Navbar />
                </header>
                <div className="w-11/12 mx-auto mt-32">

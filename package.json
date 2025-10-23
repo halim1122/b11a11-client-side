@@ -16,7 +16,7 @@
     "daisyui": "^5.0.43",
     "date-fns": "^4.1.0",
     "firebase": "^11.9.1",
-    "framer-motion": "^12.18.1",
+    "framer-motion": "^12.23.24",
     "react": "^18.3.1",
     "react-datepicker": "^8.4.0",
     "react-dom": "^18.3.1",
