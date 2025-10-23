@@ -16,6 +16,7 @@ import Login from "../Auth/Login";
 import LoadingSpinner from "../components/LoadingSpinner";
 import AboutUs from "../components/AboutUs";
 import Error from "../Error";
+import DashboardLayout from "../MainLayout/DashboardLayout";
 
 
 
@@ -35,13 +36,13 @@ export const router = createBrowserRouter([
         Component: Assignments
       },
       {
-        path:'about-Us',
+        path: 'about-Us',
         Component: AboutUs
       },
       {
         path: 'assignment/update/:id',
         loader: ({ params }) => fetch(`${import.meta.env.VITE_API}/assignment/${params.id}`),
-        hydrateFallbackElement: <LoadingSpinner/>,
+        hydrateFallbackElement: <LoadingSpinner />,
         Component: Update
       },
       {
@@ -49,21 +50,31 @@ export const router = createBrowserRouter([
         loader: ({ params }) => fetch(`${import.meta.env.VITE_API}/assignment/${params.id}`),
         hydrateFallbackElement: <LoadingSpinner />,
         Component: ViewAssignment
-      },
-      {
-        path: 'create-assignment',
-        element: <AuthPrivate><CreateAssignment /></AuthPrivate>
-      },
-      {
-        path: 'attemded-assignments',
-        element: <AuthPrivate><AttemdedAssignments /></AuthPrivate>
-      },
-      {
-        path: 'pending-assignments',
-        element: <AuthPrivate><PendingAssignments /></AuthPrivate>
       }
     ]
   },
+ {
+    path: '/dashboard',
+    element: <AuthPrivate><DashboardLayout /></AuthPrivate>,
+    children: [
+      {
+        index: true,
+        element: <Home />
+      },
+      {
+        path: 'create-assignment', 
+        element: <CreateAssignment />
+      },
+      {
+        path: 'attempted-assignments', 
+        element: <AttemdedAssignments />
+      },
+      {
+        path: 'pending-assignments', 
+        element: <PendingAssignments />
+      }
+    ]
+},
   {
     path: "/auth",
     element: <AuthLayout />,

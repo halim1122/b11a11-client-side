@@ -42,7 +42,20 @@ const Navbar = () => {
           </li>
      </>
 
-     const links2 = <>{user &&<>
+     const links2 = <>{user &&
+      <li>
+               <NavLink 
+                    to='/dashboard'
+                    className={({ isActive }) => 
+                         `nav-link ${isActive ? 'nav-link-active' : ''}`
+                    }
+               >
+                    Dashboard
+               </NavLink>
+          </li>}
+    
+     </>
+{/* <>
           <li>
                <NavLink 
                     to='/pending-assignments'
@@ -73,8 +86,7 @@ const Navbar = () => {
                     My Attempted Assignments
                </NavLink>
           </li>
-     </>}</>
-
+     </> */}
      return (
           <div className="w-11/12 mx-auto text-white">
                <div className="flex justify-between navbar items-center">
@@ -103,7 +115,7 @@ const Navbar = () => {
                     {/* Mobile Menu with Backdrop */}
                     {manu && (
                          <div 
-                              className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+                              className="fixed inset-0 bg-opacity-50 z-40 lg:hidden"
                               onClick={() => setManu(false)}
                          ></div>
                     )}
