@@ -11,7 +11,8 @@ import {
      FaChartBar,
      FaCog,
      FaTimes,
-     FaClock
+     FaClock,
+     FaTrophy
 } from 'react-icons/fa';
 import { LuLogOut } from 'react-icons/lu';
 import { AuthContext } from '../../Provider/AuthProvider';
@@ -42,6 +43,12 @@ const DashboardSidebar = ({ onClick }) => {
                name: 'Create Assignment',
                icon: <FaPlus className="text-lg" />,
                mobileIcon: <FaPlus className="text-xl" />
+          },
+          {
+               path: '/dashboard/leaderboard',
+               name: 'Leaderboard',
+               icon: <FaTrophy className="text-lg" />,
+               mobileIcon: <FaTrophy className="text-xl" />
           },
           {
                path: '/dashboard/attempted-assignments',

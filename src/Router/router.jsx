@@ -17,7 +17,7 @@ import AboutUs from "../components/AboutUs";
 import Error from "../Error";
 import DashboardLayout from "../MainLayout/DashboardLayout";
 import ProfilePage from "../components/Dashboard/ProfilePage";
-import ScrollToTop from "../components/ScrollToTop";
+import Leaderboard from "../components/Dashboard/Leaderboard";
 
 
 
@@ -81,6 +81,9 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         element: <ProfilePage />
+      },{
+        path: 'leaderboard',
+        element: <Leaderboard />
       }
     ]
 },
