@@ -5,7 +5,7 @@ import GiveMarkModal from "./GiveMarkModal";
 import { Helmet } from "react-helmet-async";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { FaClock, FaUser, FaFileAlt, FaStar, FaCheckCircle } from "react-icons/fa";
+import { FaClock, FaUser, FaFileAlt, FaStar, FaCheckCircle, FaExternalLinkAlt } from "react-icons/fa";
 import Loading from "../Auth/Loading";
 
 const PendingAssignments = () => {
@@ -30,19 +30,19 @@ const PendingAssignments = () => {
       });
   }, [user]);
 
-  if (!user?.email) return <div className="flex justify-center items-center ">
+  if (!user?.email) return <div className="flex justify-center items-center min-h-screen">
     <Loading />
   </div>;
 
-  if(loading) return <div className="flex justify-center items-center ">
+  if(loading) return <div className="flex justify-center items-center min-h-screen">
     <Loading />
   </div>;
 
   const pendingSubmissions = submissions.filter(sub => sub.submittedBy !== user.email);
   const mySubmissions = submissions.filter(sub => sub.submittedBy === user.email);
-console.log(submissions)
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 py-8 px-4">
       <Helmet>
         <title>Pending Assignments - BrainBand</title>
       </Helmet>
@@ -61,15 +61,15 @@ console.log(submissions)
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-xl flex items-center justify-center">
-              <FaClock className="text-yellow-600 dark:text-yellow-400 text-xl" />
+            <div className="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+              <FaClock className="text-yellow-600 text-xl" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-200">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
               Pending Assignments
             </h1>
           </motion.div>
           <motion.p
-            className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
+            className="text-gray-600 text-lg max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -85,151 +85,248 @@ console.log(submissions)
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center">
-                <FaFileAlt className="text-blue-600 dark:text-blue-400 text-xl" />
+              <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                <FaFileAlt className="text-blue-600 text-xl" />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-800 dark:text-gray-200">{submissions.length}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Total Pending</p>
+                <p className="text-2xl font-bold text-gray-800">{submissions.length}</p>
+                <p className="text-sm text-gray-600">Total Pending</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center">
-                <FaCheckCircle className="text-green-600 dark:text-green-400 text-xl" />
+              <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
+                <FaCheckCircle className="text-green-600 text-xl" />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-800 dark:text-gray-200">{pendingSubmissions.length}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Available for Review</p>
+                <p className="text-2xl font-bold text-gray-800">{pendingSubmissions.length}</p>
+                <p className="text-sm text-gray-600">Available for Review</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center">
-                <FaUser className="text-purple-600 dark:text-purple-400 text-xl" />
+              <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+                <FaUser className="text-purple-600 text-xl" />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-800 dark:text-gray-200">{mySubmissions.length}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Your Submissions</p>
+                <p className="text-2xl font-bold text-gray-800">{mySubmissions.length}</p>
+                <p className="text-sm text-gray-600">Your Submissions</p>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {loading && submissions.length === 0 ? (
-          <motion.div
-            className="text-center py-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            <div className="w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-              <FaClock className="text-3xl text-gray-400" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-600 dark:text-gray-400 mb-2">
-              No Pending Assignments
-            </h3>
-            <p className="text-gray-500 dark:text-gray-500">
-              There are currently no assignments waiting for evaluation.
-            </p>
-          </motion.div>
-        ) : (
-          <motion.div
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gradient-to-r from-primary to-secondary">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-white font-semibold whitespace-nowrap">
-                      Assignment Details
-                    </th>
-                    <th className="px-6 py-4 text-left text-white font-semibold whitespace-nowrap">
-                      Total Marks
-                    </th>
-                    <th className="px-6 py-4 text-left text-white font-semibold whitespace-nowrap">
-                      Submitted By
-                    </th>
-                    <th className="px-6 py-4 text-center text-white font-semibold whitespace-nowrap">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                  {submissions.map((sub, index) => (
-                    <motion.tr
-                      key={sub._id}
-                      className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.7 + index * 0.1 }}
+        {/* Desktop Table View (lg and above) */}
+        <div className="hidden lg:block">
+          {submissions.length === 0 ? (
+            <motion.div
+              className="text-center py-12 bg-white rounded-2xl shadow-lg border border-gray-200"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FaClock className="text-3xl text-gray-400" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                No Pending Assignments
+              </h3>
+              <p className="text-gray-500">
+                There are currently no assignments waiting for evaluation.
+              </p>
+            </motion.div>
+          ) : (
+            <motion.div
+              className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gradient-to-r from-blue-600 to-purple-600">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-white font-semibold text-lg whitespace-nowrap">
+                        Assignment Details
+                      </th>
+                      <th className="px-6 py-4 text-left text-white font-semibold text-lg whitespace-nowrap">
+                        Submitted By
+                      </th>
+                      <th className="px-6 py-4 text-left text-white font-semibold text-lg whitespace-nowrap">
+                        Submission Date
+                      </th>
+                      <th className="px-6 py-4 text-center text-white font-semibold text-lg whitespace-nowrap">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {submissions.map((sub, index) => (
+                      <motion.tr
+                        key={sub._id}
+                        className="hover:bg-gray-50 transition-colors duration-200"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.7 + index * 0.1 }}
+                      >
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                              <FaFileAlt className="text-blue-600 text-lg" />
+                            </div>
+                            <div>
+                              <p className="font-semibold text-gray-800 text-lg">
+                                {sub.assignmentTitle || "Untitled Assignment"}
+                              </p>
+                              <a
+                                href={sub.docsLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-blue-600 text-sm hover:underline"
+                              >
+                                <FaExternalLinkAlt className="text-xs" />
+                                View Submission
+                              </a>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-2">
+                            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                              <FaUser className="text-purple-600" />
+                            </div>
+                            <span className="text-gray-700 font-medium text-lg">
+                              {sub.submittedBy || "Unknown"}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="text-gray-700 text-lg">
+                            {new Date(sub.submittedAt).toLocaleDateString()}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          {sub.submittedBy !== user.email ? (
+                            <motion.button
+                              onClick={() => setSelected(sub)}
+                              className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-lg"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              Evaluate
+                            </motion.button>
+                          ) : (
+                            <span className="inline-flex items-center gap-2 bg-gray-100 text-gray-500 px-4 py-3 rounded-lg text-lg">
+                              <FaUser />
+                              Your Submission
+                            </span>
+                          )}
+                        </td>
+                      </motion.tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
+          )}
+        </div>
+
+        {/* Mobile Card View (below lg) */}
+        <div className="lg:hidden space-y-4">
+          {submissions.length === 0 ? (
+            <motion.div
+              className="text-center py-12 bg-white rounded-2xl shadow-lg border border-gray-200"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FaClock className="text-3xl text-gray-400" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                No Pending Assignments
+              </h3>
+              <p className="text-gray-500">
+                There are currently no assignments waiting for evaluation.
+              </p>
+            </motion.div>
+          ) : (
+            submissions.map((sub, index) => (
+              <motion.div
+                key={sub._id}
+                className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 + index * 0.1 }}
+              >
+                {/* Header */}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <FaFileAlt className="text-blue-600 text-lg" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-gray-800 text-lg">
+                        {sub.assignmentTitle || "Untitled Assignment"}
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        {new Date(sub.submittedAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Submitted By */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                    <FaUser className="text-purple-600 text-sm" />
+                  </div>
+                  <span className="text-gray-700 font-medium">
+                    {sub.submittedBy || "Unknown"}
+                  </span>
+                </div>
+
+                {/* Submission Link */}
+                <div className="mb-4">
+                  <a
+                    href={sub.docsLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-blue-600 font-medium text-sm"
+                  >
+                    <FaExternalLinkAlt className="text-xs" />
+                    View Submission Document
+                  </a>
+                </div>
+
+                {/* Action Button */}
+                <div className="text-center">
+                  {sub.submittedBy !== user.email ? (
+                    <motion.button
+                      onClick={() => setSelected(sub)}
+                      className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                            <FaFileAlt className="text-blue-600 dark:text-blue-400" />
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-800 dark:text-gray-200">
-                              {sub.assignmentTitle || "Untitled Assignment"}
-                            </p>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
-                              Submitted on {new Date(sub.submissionDate).toLocaleDateString()}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
-                          <FaStar className="text-yellow-500 text-sm" />
-                          <span className="font-semibold text-gray-800 dark:text-gray-200">
-                            {sub.marks || "N/A"}
-                          </span>
-                        </span>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
-                            <FaUser className="text-purple-600 dark:text-purple-400 text-sm" />
-                          </div>
-                          <span className="text-gray-700 dark:text-gray-300 font-medium">
-                            {sub.submittedBy || "Unknown"}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        {sub.submittedBy !== user.email ? (
-                          <motion.button
-                            onClick={() => setSelected(sub)}
-                            className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            Evaluate
-                          </motion.button>
-                        ) : (
-                          <span className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-3 py-2 rounded-lg text-sm">
-                            <FaUser className="text-sm" />
-                            Your Submission
-                          </span>
-                        )}
-                      </td>
-                    </motion.tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </motion.div>
-        )}
+                      Evaluate Assignment
+                    </motion.button>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 bg-gray-100 text-gray-500 w-full justify-center py-3 rounded-lg text-sm">
+                      <FaUser />
+                      Your Submission
+                    </span>
+                  )}
+                </div>
+              </motion.div>
+            ))
+          )}
+        </div>
 
         {selected && (
           <GiveMarkModal
