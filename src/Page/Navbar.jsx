@@ -55,38 +55,6 @@ const Navbar = () => {
           </li>}
     
      </>
-{/* <>
-          <li>
-               <NavLink 
-                    to='/pending-assignments'
-                    className={({ isActive }) => 
-                         `nav-link ${isActive ? 'nav-link-active' : ''}`
-                    }
-               >
-                    Pending Assignments
-               </NavLink>
-          </li>
-          <li>
-               <NavLink 
-                    to='/create-assignment'
-                    className={({ isActive }) => 
-                         `nav-link ${isActive ? 'nav-link-active' : ''}`
-                    }
-               >
-                    Create Assignment
-               </NavLink>
-          </li>
-          <li>
-               <NavLink 
-                    to='/attemded-assignments'
-                    className={({ isActive }) => 
-                         `nav-link ${isActive ? 'nav-link-active' : ''}`
-                    }
-               >
-                    My Attempted Assignments
-               </NavLink>
-          </li>
-     </> */}
      return (
           <div className="w-11/12 mx-auto text-white">
                <div className="flex justify-between navbar items-center">
@@ -170,39 +138,6 @@ const Navbar = () => {
                          </div>
                     </div>
                </div>
-
-               {/* Add CSS for smooth transitions */}
-               <style jsx>{`
-                    .nav-link {
-                         position: relative;
-                         padding: 8px 16px;
-                         border-radius: 20px;
-                         transition: all 0.3s ease;
-                         font-weight: 500;
-                    }
-                    
-                    .nav-link:hover {
-                         background: rgba(255, 255, 255, 0.1);
-                         transform: translateY(-2px);
-                    }
-                    
-                    .nav-link-active {
-                         background: rgba(255, 255, 255, 0.2);
-                         box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-                    }
-                    
-                    .nav-link-active::after {
-                         content: '';
-                         position: absolute;
-                         bottom: -5px;
-                         left: 50%;
-                         transform: translateX(-50%);
-                         width: 5px;
-                         height: 5px;
-                         background: white;
-                         border-radius: 50%;
-                    }
-               `}</style>
           </div>
      );
 };

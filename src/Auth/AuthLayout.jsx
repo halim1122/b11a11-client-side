@@ -8,7 +8,7 @@ const AuthLayout = () => {
           <div>
                <div className='shadow'>
                     <LoginNavbar />
-                    <header className="shadow fixed top-[56px] w-full z-40 bg-primary">
+                    <header className="shadow fixed top-[56px] w-full z-40 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-medium">
                          <Navbar />
                     </header>
                </div>

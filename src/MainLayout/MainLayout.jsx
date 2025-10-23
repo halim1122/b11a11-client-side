@@ -3,10 +3,12 @@ import { Outlet } from 'react-router';
 import Navbar from '../Page/Navbar';
 import Footer from '../Page/Footer';
 import LoginNavbar from '../Page/LoginNavbar';
+import ScrollToTop from '../components/ScrollToTop';
 
 const MainLayout = () => {
      return (
           <div>
+               <ScrollToTop />
                <LoginNavbar />
                <header className="shadow fixed top-[56px] mb-0 w-full z-40 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-medium">
                     <Navbar />

@@ -3,7 +3,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from 'framer-motion';
 import { FaBars, FaBell, FaUserCircle, FaCog, FaTimes } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
 
 const DashboardNavbar = ({ onMenuToggle }) => {
      const { user, logout } = useContext(AuthContext);
@@ -78,14 +78,10 @@ const DashboardNavbar = ({ onMenuToggle }) => {
                                              animate={{ opacity: 1, y: 0, scale: 1 }}
                                              exit={{ opacity: 0, y: -10, scale: 0.95 }}
                                         >
-                                             <button className="w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2">
+                                             <NavLink to={`/dashboard/profile`} className="w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2">
                                                   <FaUserCircle />
                                                   Profile
-                                             </button>
-                                             <button className="w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2">
-                                                  <FaCog />
-                                                  Settings
-                                             </button>
+                                             </NavLink>
                                              <div className="border-t border-gray-200 dark:border-gray-600 my-1"></div>
                                              <button
                                                   onClick={logout}

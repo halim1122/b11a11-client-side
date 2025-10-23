@@ -13,10 +13,11 @@ import AttemdedAssignments from "../Page/AttemdedAssignments";
 import AuthLayout from "../Auth/AuthLayout";
 import Register from "../Auth/Register";
 import Login from "../Auth/Login";
-import LoadingSpinner from "../components/LoadingSpinner";
 import AboutUs from "../components/AboutUs";
 import Error from "../Error";
 import DashboardLayout from "../MainLayout/DashboardLayout";
+import ProfilePage from "../components/Dashboard/ProfilePage";
+import ScrollToTop from "../components/ScrollToTop";
 
 
 
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
       {
         path: 'assignments',
         loader: () => fetch(`${import.meta.env.VITE_API}/assignments`),
-        hydrateFallbackElement: <LoadingSpinner />,
+        hydrateFallbackElement: <Loading />,
         Component: Assignments
       },
       {
@@ -42,13 +43,13 @@ export const router = createBrowserRouter([
       {
         path: 'assignment/update/:id',
         loader: ({ params }) => fetch(`${import.meta.env.VITE_API}/assignment/${params.id}`),
-        hydrateFallbackElement: <LoadingSpinner />,
+        hydrateFallbackElement: <Loading />,
         Component: Update
       },
       {
         path: 'assignment/:id',
         loader: ({ params }) => fetch(`${import.meta.env.VITE_API}/assignment/${params.id}`),
-        hydrateFallbackElement: <LoadingSpinner />,
+        hydrateFallbackElement: <Loading />,
         Component: ViewAssignment
       }
     ]
@@ -66,12 +67,20 @@ export const router = createBrowserRouter([
         element: <CreateAssignment />
       },
       {
+        path: 'assignments',
+        element: <Assignments />
+      },
+      {
         path: 'attempted-assignments', 
         element: <AttemdedAssignments />
       },
       {
         path: 'pending-assignments', 
         element: <PendingAssignments />
+      },
+      {
+        path: 'profile',
+        element: <ProfilePage />
       }
     ]
 },
